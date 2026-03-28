@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Beautiful Wedding Websites for Indian Couples</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --burgundy: #5C1A1A;
@@ -24,7 +33,9 @@
       --white: #FFFDF8;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: 'Jost', sans-serif;
@@ -42,609 +53,1171 @@
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 18px 5%;
-      background: rgba(250,243,232,0.92);
+      background: rgba(250, 243, 232, 0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,153,58,0.2);
+      border-bottom: 1px solid rgba(201, 153, 58, 0.2);
     }
+
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.7rem; font-weight: 600; letter-spacing: 0.03em;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
       color: var(--burgundy);
       text-decoration: none;
     }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
     .nav-links a {
-      font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-mid); text-decoration: none; font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      font-weight: 500;
       transition: color .2s;
     }
-    .nav-links a:hover { color: var(--gold); }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
     .nav-cta {
-      background: var(--burgundy); color: var(--cream) !important;
-      padding: 9px 22px; border-radius: 2px;
+      background: var(--burgundy);
+      color: var(--cream) !important;
+      padding: 9px 22px;
+      border-radius: 2px;
       letter-spacing: 0.1em !important;
       transition: background .2s !important;
     }
-    .nav-cta:hover { background: var(--deep-red) !important; color: var(--cream) !important; }
+
+    .nav-cta:hover {
+      background: var(--deep-red) !important;
+      color: var(--cream) !important;
+    }
 
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       padding: 120px 5% 80px;
       position: relative;
       background: var(--cream);
       overflow: hidden;
     }
+
     .hero-bg-pattern {
-      position: absolute; inset: 0; pointer-events: none;
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
       background-image:
-        radial-gradient(circle at 15% 20%, rgba(201,153,58,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 75%, rgba(92,26,26,0.07) 0%, transparent 50%);
+        radial-gradient(circle at 15% 20%, rgba(201, 153, 58, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 75%, rgba(92, 26, 26, 0.07) 0%, transparent 50%);
     }
+
     .hero-badge {
       display: inline-block;
-      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); border: 1px solid var(--gold-light);
-      padding: 6px 18px; border-radius: 50px; margin-bottom: 28px;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-light);
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 28px;
       font-weight: 500;
       animation: fadeUp .8s ease both;
     }
+
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(3rem, 7vw, 6.5rem);
-      font-weight: 300; line-height: 1.1;
+      font-weight: 300;
+      line-height: 1.1;
       color: var(--burgundy);
       margin-bottom: 10px;
       animation: fadeUp .9s .1s ease both;
     }
-    .hero-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 400;
+    }
+
     .hero-subtitle-hindi {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.1rem, 2.5vw, 1.8rem);
-      color: var(--text-light); font-style: italic; font-weight: 300;
+      color: var(--text-light);
+      font-style: italic;
+      font-weight: 300;
       margin-bottom: 20px;
       animation: fadeUp .9s .15s ease both;
     }
+
     .hero-desc {
-      max-width: 560px; font-size: 1rem; line-height: 1.75;
-      color: var(--text-mid); font-weight: 300; margin-bottom: 44px;
+      max-width: 560px;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-mid);
+      font-weight: 300;
+      margin-bottom: 44px;
       animation: fadeUp .9s .2s ease both;
     }
+
     .hero-btns {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
       animation: fadeUp .9s .3s ease both;
     }
+
     .btn-primary {
-      background: var(--burgundy); color: var(--cream);
-      padding: 15px 38px; font-family: 'Jost', sans-serif;
-      font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 500; border: none; cursor: pointer; border-radius: 2px;
-      text-decoration: none; transition: all .25s;
+      background: var(--burgundy);
+      color: var(--cream);
+      padding: 15px 38px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all .25s;
     }
-    .btn-primary:hover { background: var(--deep-red); transform: translateY(-1px); }
+
+    .btn-primary:hover {
+      background: var(--deep-red);
+      transform: translateY(-1px);
+    }
+
     .btn-outline {
-      background: transparent; color: var(--burgundy);
+      background: transparent;
+      color: var(--burgundy);
       border: 1.5px solid var(--burgundy);
-      padding: 14px 38px; font-family: 'Jost', sans-serif;
-      font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 500; cursor: pointer; border-radius: 2px;
-      text-decoration: none; transition: all .25s;
+      padding: 14px 38px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all .25s;
     }
-    .btn-outline:hover { background: var(--cream-dark); transform: translateY(-1px); }
+
+    .btn-outline:hover {
+      background: var(--cream-dark);
+      transform: translateY(-1px);
+    }
+
     .hero-divider {
-      width: 180px; height: 1px;
+      width: 180px;
+      height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
       margin: 52px auto 0;
       animation: fadeUp .9s .4s ease both;
     }
+
     .hero-stats {
-      display: flex; gap: 60px; justify-content: center; flex-wrap: wrap;
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+      flex-wrap: wrap;
       margin-top: 40px;
       animation: fadeUp .9s .45s ease both;
     }
-    .hero-stat { text-align: center; }
+
+    .hero-stat {
+      text-align: center;
+    }
+
     .hero-stat-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem; font-weight: 600; color: var(--burgundy);
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--burgundy);
       display: block;
     }
-    .hero-stat-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
 
     /* Floating petals */
     .petal {
-      position: absolute; pointer-events: none;
-      width: 12px; height: 18px; border-radius: 50% 0 50% 0;
+      position: absolute;
+      pointer-events: none;
+      width: 12px;
+      height: 18px;
+      border-radius: 50% 0 50% 0;
       opacity: 0;
       animation: petalFall linear infinite;
     }
+
     @keyframes petalFall {
-      0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
-      10%  { opacity: 0.6; }
-      90%  { opacity: 0.3; }
-      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+      0% {
+        transform: translateY(-40px) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.6;
+      }
+
+      90% {
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
     }
 
     /* ── SECTION SHARED ── */
-    section { padding: 100px 5%; }
-    .section-tag {
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 14px; display: block;
+    section {
+      padding: 100px 12.5%;
     }
+
+    .section-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 14px;
+      display: block;
+    }
+
     .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 400;
-      color: var(--burgundy); line-height: 1.2; margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 400;
+      color: var(--burgundy);
+      line-height: 1.2;
+      margin-bottom: 18px;
     }
-    .section-title em { font-style: italic; color: var(--gold); }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
     .section-body {
-      font-size: 1rem; line-height: 1.8; color: var(--text-mid);
-      font-weight: 300; max-width: 560px;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+      font-weight: 300;
+      max-width: 560px;
     }
+
     .gold-rule {
-      width: 60px; height: 2px; background: var(--gold);
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
       margin: 0 0 32px 0;
     }
 
     .faded-text {
-        font-style: italic;
-  opacity: 0.6;
+      font-style: italic;
+      opacity: 0.6;
 
     }
+
     /* ── HOW IT WORKS ── */
-    #how { background: var(--white); }
-    .steps-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 48px; margin-top: 64px;
+    #how {
+      background: var(--white);
     }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 48px;
+      margin-top: 64px;
+    }
+
     .step {
-      position: relative; padding-left: 24px;
+      position: relative;
+      padding-left: 24px;
       border-left: 2px solid var(--cream-dark);
       transition: border-color .3s;
     }
-    .step:hover { border-color: var(--gold); }
+
+    .step:hover {
+      border-color: var(--gold);
+    }
+
     .step-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem; font-weight: 300; color: var(--cream-dark);
-      line-height: 1; margin-bottom: 12px;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--cream-dark);
+      line-height: 1;
+      margin-bottom: 12px;
       transition: color .3s;
     }
-    .step:hover .step-num { color: var(--gold-light); }
+
+    .step:hover .step-num {
+      color: var(--gold-light);
+    }
+
     .step-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; font-weight: 500; color: var(--burgundy);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--burgundy);
       margin-bottom: 10px;
     }
-    .step-desc { font-size: 0.9rem; line-height: 1.7; color: var(--text-mid); font-weight: 300; }
+
+    .step-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-mid);
+      font-weight: 300;
+    }
 
     /* ── FEATURES SHOWCASE ── */
-    #features { background: var(--cream); }
+    #features {
+      background: var(--cream);
+    }
+
     .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 28px; margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 28px;
+      margin-top: 64px;
     }
+
     .feature-card {
-      background: var(--white); padding: 32px 28px;
-      border: 1px solid rgba(201,153,58,0.15);
+      background: var(--white);
+      padding: 32px 28px;
+      border: 1px solid rgba(201, 153, 58, 0.15);
       border-radius: 4px;
-      transition: all .3s; cursor: default;
+      transition: all .3s;
+      cursor: default;
     }
+
     .feature-card:hover {
       border-color: var(--gold);
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(92,26,26,0.06);
+      box-shadow: 0 12px 40px rgba(92, 26, 26, 0.06);
     }
+
     .feature-icon {
-      font-size: 1.6rem; margin-bottom: 16px; display: block;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      display: block;
     }
+
     .feature-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem; font-weight: 600; color: var(--burgundy);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--burgundy);
       margin-bottom: 8px;
     }
-    .feature-desc { font-size: 0.85rem; line-height: 1.65; color: var(--text-mid); font-weight: 300; }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      line-height: 1.65;
+      color: var(--text-mid);
+      font-weight: 300;
+    }
 
     /* ── PRICING ── */
-    #pricing { background: var(--white); }
+    #pricing {
+      background: var(--white);
+    }
+
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px; margin-top: 64px; align-items: start;
+      gap: 28px;
+      margin-top: 64px;
+      align-items: start;
     }
+
     .pricing-card {
       border: 1.5px solid var(--cream-dark);
-      border-radius: 4px; padding: 42px 36px;
-      position: relative; transition: all .35s;
+      border-radius: 4px;
+      padding: 42px 36px;
+      position: relative;
+      transition: all .35s;
       background: var(--white);
     }
+
     .pricing-card:hover {
       border-color: var(--gold-light);
-      box-shadow: 0 20px 60px rgba(92,26,26,0.07);
+      box-shadow: 0 20px 60px rgba(92, 26, 26, 0.07);
       transform: translateY(-5px);
     }
+
     .pricing-card.featured {
-      background: var(--burgundy); border-color: var(--burgundy);
+      background: var(--burgundy);
+      border-color: var(--burgundy);
     }
+
     .pricing-card.featured:hover {
-      border-color: var(--gold); transform: translateY(-7px);
-      box-shadow: 0 24px 70px rgba(92,26,26,0.25);
+      border-color: var(--gold);
+      transform: translateY(-7px);
+      box-shadow: 0 24px 70px rgba(92, 26, 26, 0.25);
     }
+
     .plan-badge {
-      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: var(--gold); color: var(--white);
-      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-      font-weight: 600; padding: 5px 16px; border-radius: 50px;
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 5px 16px;
+      border-radius: 50px;
       white-space: nowrap;
     }
+
     .plan-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 8px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 8px;
     }
-    .featured .plan-name { color: var(--gold-light); }
+
+    .featured .plan-name {
+      color: var(--gold-light);
+    }
+
     .plan-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem; font-weight: 600; color: var(--burgundy);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--burgundy);
       margin-bottom: 6px;
     }
-    .featured .plan-title { color: var(--white); }
+
+    .featured .plan-title {
+      color: var(--white);
+    }
+
     .plan-price {
-      font-size: 1.9rem; font-weight: 600; color: var(--burgundy);
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--burgundy);
       margin-bottom: 4px;
     }
-    .featured .plan-price { color: var(--gold-light); }
+
+    .featured .plan-price {
+      color: var(--gold-light);
+    }
+
     .plan-price-note {
-      font-size: 0.78rem; color: var(--text-light); margin-bottom: 28px;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-bottom: 28px;
     }
-    .featured .plan-price-note { color: rgba(250,243,232,0.6); }
+
+    .featured .plan-price-note {
+      color: rgba(250, 243, 232, 0.6);
+    }
+
     .plan-divider {
-      height: 1px; background: var(--cream-dark); margin-bottom: 28px;
+      height: 1px;
+      background: var(--cream-dark);
+      margin-bottom: 28px;
     }
-    .featured .plan-divider { background: rgba(255,255,255,0.15); }
-    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-bottom: 36px; }
+
+    .featured .plan-divider {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 36px;
+    }
+
     .plan-features li {
-      font-size: 0.88rem; color: var(--text-mid); font-weight: 300;
-      display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      font-weight: 300;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
     }
-    .featured .plan-features li { color: rgba(250,243,232,0.85); }
+
+    .featured .plan-features li {
+      color: rgba(250, 243, 232, 0.85);
+    }
+
     .plan-features li::before {
-      content: '✦'; color: var(--gold); font-size: 0.6rem; flex-shrink: 0; margin-top: 3px;
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+      margin-top: 3px;
     }
-    .featured .plan-features li::before { color: var(--gold-light); }
+
+    .featured .plan-features li::before {
+      color: var(--gold-light);
+    }
+
     .plan-cta {
-      width: 100%; padding: 14px;
+      width: 100%;
+      padding: 14px;
       font-family: 'Jost', sans-serif;
-      font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 500; cursor: pointer; border-radius: 2px;
-      transition: all .25s; text-decoration: none;
-      display: block; text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all .25s;
+      text-decoration: none;
+      display: block;
+      text-align: center;
     }
+
     .plan-cta-outline {
-      background: transparent; color: var(--burgundy);
+      background: transparent;
+      color: var(--burgundy);
       border: 1.5px solid var(--burgundy);
     }
-    .plan-cta-outline:hover { background: var(--cream); }
+
+    .plan-cta-outline:hover {
+      background: var(--cream);
+    }
+
     .plan-cta-solid {
-      background: var(--gold); color: var(--white);
+      background: var(--gold);
+      color: var(--white);
       border: none;
     }
-    .plan-cta-solid:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .plan-delivery {
-      text-align: center; margin-top: 14px;
-      font-size: 0.75rem; color: var(--text-light); font-style: italic;
+
+    .plan-cta-solid:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
     }
-    .featured .plan-delivery { color: rgba(250,243,232,0.5); }
+
+    .plan-delivery {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .featured .plan-delivery {
+      color: rgba(250, 243, 232, 0.5);
+    }
 
     /* ── DEMO PREVIEW ── */
-    #preview { background: var(--cream); }
+    #preview {
+      background: var(--cream);
+    }
+
     .preview-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
       margin-top: 64px;
     }
+
     .preview-mockup {
       background: var(--white);
-      border: 1px solid rgba(201,153,58,0.2);
+      border: 1px solid rgba(201, 153, 58, 0.2);
       border-radius: 8px;
-      box-shadow: 0 24px 80px rgba(92,26,26,0.1);
+      box-shadow: 0 24px 80px rgba(92, 26, 26, 0.1);
       overflow: hidden;
       aspect-ratio: 9/16;
       max-height: 520px;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
+
     .mockup-header {
-      background: var(--burgundy); padding: 24px 20px; text-align: center;
+      background: var(--burgundy);
+      padding: 24px 20px;
+      text-align: center;
     }
+
     .mockup-header-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; color: var(--gold-light); font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      font-style: italic;
     }
+
     .mockup-header-names {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.9rem; color: var(--white); font-weight: 300; margin: 4px 0;
+      font-size: 1.9rem;
+      color: var(--white);
+      font-weight: 300;
+      margin: 4px 0;
     }
-    .mockup-header-date { font-size: 0.7rem; color: rgba(250,243,232,0.6); letter-spacing: 0.15em; }
-    .mockup-body { padding: 20px; flex: 1; background: var(--cream); }
+
+    .mockup-header-date {
+      font-size: 0.7rem;
+      color: rgba(250, 243, 232, 0.6);
+      letter-spacing: 0.15em;
+    }
+
+    .mockup-body {
+      padding: 20px;
+      flex: 1;
+      background: var(--cream);
+    }
+
     .mockup-section {
-      background: var(--white); border-radius: 4px; padding: 16px;
-      margin-bottom: 12px; border: 1px solid rgba(201,153,58,0.1);
+      background: var(--white);
+      border-radius: 4px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(201, 153, 58, 0.1);
     }
+
     .mockup-section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.9rem; color: var(--burgundy); font-weight: 600;
-      margin-bottom: 8px; letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      color: var(--burgundy);
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
     }
-    .mockup-section-body { font-size: 0.7rem; color: var(--text-mid); line-height: 1.5; }
+
+    .mockup-section-body {
+      font-size: 0.7rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
     .mockup-btn {
-      display: block; background: var(--burgundy); color: var(--white);
-      text-align: center; padding: 8px; border-radius: 2px;
-      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      display: block;
+      background: var(--burgundy);
+      color: var(--white);
+      text-align: center;
+      padding: 8px;
+      border-radius: 2px;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       margin-top: 8px;
     }
+
     .mockup-map {
-      height: 60px; background: linear-gradient(135deg, #e8e0d0 0%, #d4c9b0 100%);
-      border-radius: 3px; position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      height: 60px;
+      background: linear-gradient(135deg, #e8e0d0 0%, #d4c9b0 100%);
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .mockup-map::after {
       content: '📍';
       font-size: 1.2rem;
     }
-    .preview-points { display: flex; flex-direction: column; gap: 28px; }
-    .preview-point { display: flex; gap: 18px; align-items: flex-start; }
+
+    .preview-points {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .preview-point {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
     .preview-point-icon {
-      width: 44px; height: 44px; flex-shrink: 0;
-      background: var(--cream-dark); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: var(--cream-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.1rem;
     }
+
     .preview-point-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600; color: var(--burgundy); margin-bottom: 5px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 5px;
     }
-    .preview-point-desc { font-size: 0.87rem; line-height: 1.65; color: var(--text-mid); font-weight: 300; }
+
+    .preview-point-desc {
+      font-size: 0.87rem;
+      line-height: 1.65;
+      color: var(--text-mid);
+      font-weight: 300;
+    }
 
     /* ── TESTIMONIALS ── */
-    #testimonials { background: var(--white); }
-    .testimonials-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px; margin-top: 64px;
+    #testimonials {
+      background: var(--white);
     }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 64px;
+    }
+
     .testimonial-card {
-      background: var(--cream); padding: 36px 32px;
-      border-radius: 4px; border: 1px solid rgba(201,153,58,0.1);
+      background: var(--cream);
+      padding: 36px 32px;
+      border-radius: 4px;
+      border: 1px solid rgba(201, 153, 58, 0.1);
       position: relative;
     }
+
     .testimonial-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem; color: var(--gold-light); line-height: 1;
-      margin-bottom: 16px; display: block;
+      font-size: 3rem;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 16px;
+      display: block;
     }
+
     .testimonial-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; line-height: 1.7; color: var(--text-dark);
-      font-style: italic; margin-bottom: 24px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-dark);
+      font-style: italic;
+      margin-bottom: 24px;
     }
+
     .testimonial-couple {
-      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
     }
-    .testimonial-location { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; }
+
+    .testimonial-location {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
 
     /* ── FAQ ── */
-    #faq { background: var(--cream); }
-    .faq-list { max-width: 720px; margin-top: 64px; }
+    #faq {
+      background: var(--cream);
+    }
+
+    .faq-list {
+      max-width: 720px;
+      margin-top: 64px;
+    }
+
     .faq-item {
-      border-bottom: 1px solid rgba(201,153,58,0.2);
+      border-bottom: 1px solid rgba(201, 153, 58, 0.2);
       padding: 24px 0;
     }
+
     .faq-q {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; font-weight: 500; color: var(--burgundy);
-      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--burgundy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 16px;
     }
-    .faq-q span { transition: transform .3s; }
-    .faq-a {
-      font-size: 0.9rem; line-height: 1.75; color: var(--text-mid);
-      font-weight: 300; max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s;
+
+    .faq-q span {
+      transition: transform .3s;
     }
-    .faq-item.open .faq-a { max-height: 200px; padding-top: 14px; }
-    .faq-item.open .faq-q span { transform: rotate(45deg); }
+
+    .faq-a {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text-mid);
+      font-weight: 300;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, padding .3s;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding-top: 14px;
+    }
+
+    .faq-item.open .faq-q span {
+      transform: rotate(45deg);
+    }
 
     /* ── CTA BANNER ── */
     #cta-banner {
       background: var(--burgundy);
-      padding: 100px 5%; text-align: center;
+      padding: 100px 5%;
+      text-align: center;
     }
-    #cta-banner .section-tag { color: var(--gold-light); }
-    #cta-banner .section-title { color: var(--white); }
-    #cta-banner .section-title em { color: var(--gold-light); }
-    #cta-banner .section-body { color: rgba(250,243,232,0.7); margin: 0 auto 40px; }
-    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+
+    #cta-banner .section-tag {
+      color: var(--gold-light);
+    }
+
+    #cta-banner .section-title {
+      color: var(--white);
+    }
+
+    #cta-banner .section-title em {
+      color: var(--gold-light);
+    }
+
+    #cta-banner .section-body {
+      color: rgba(250, 243, 232, 0.7);
+      margin: 0 auto 40px;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
     .btn-cream {
-      background: var(--cream); color: var(--burgundy);
-      padding: 15px 38px; font-family: 'Jost', sans-serif;
-      font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 500; border: none; cursor: pointer; border-radius: 2px;
-      text-decoration: none; transition: all .25s;
+      background: var(--cream);
+      color: var(--burgundy);
+      padding: 15px 38px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all .25s;
     }
-    .btn-cream:hover { background: var(--white); transform: translateY(-1px); }
+
+    .btn-cream:hover {
+      background: var(--white);
+      transform: translateY(-1px);
+    }
+
     .btn-ghost {
-      background: transparent; color: var(--cream);
-      border: 1.5px solid rgba(250,243,232,0.4);
-      padding: 14px 38px; font-family: 'Jost', sans-serif;
-      font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 500; cursor: pointer; border-radius: 2px;
-      text-decoration: none; transition: all .25s;
+      background: transparent;
+      color: var(--cream);
+      border: 1.5px solid rgba(250, 243, 232, 0.4);
+      padding: 14px 38px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all .25s;
     }
-    .btn-ghost:hover { border-color: var(--cream); transform: translateY(-1px); }
+
+    .btn-ghost:hover {
+      border-color: var(--cream);
+      transform: translateY(-1px);
+    }
+
     .whatsapp-note {
-      margin-top: 28px; font-size: 0.82rem; color: rgba(250,243,232,0.5);
+      margin-top: 28px;
+      font-size: 0.82rem;
+      color: rgba(250, 243, 232, 0.5);
     }
-    .whatsapp-note a { color: var(--gold-light); text-decoration: none; }
+
+    .whatsapp-note a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--text-dark); padding: 60px 5% 40px;
+      background: var(--text-dark);
+      padding: 60px 5% 40px;
     }
+
     .footer-inner {
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
-      gap: 60px; margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 48px;
     }
+
     .footer-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem; font-weight: 600; color: var(--cream);
-      margin-bottom: 14px; display: block;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 14px;
+      display: block;
     }
-    .footer-logo span { color: var(--gold); }
-    .footer-desc { font-size: 0.85rem; line-height: 1.75; color: rgba(250,243,232,0.45); font-weight: 300; }
+
+    .footer-logo span {
+      color: var(--gold);
+    }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: rgba(250, 243, 232, 0.45);
+      font-weight: 300;
+    }
+
     .footer-col-title {
-      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 20px;
     }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .footer-links a {
-      font-size: 0.85rem; color: rgba(250,243,232,0.45); text-decoration: none;
+      font-size: 0.85rem;
+      color: rgba(250, 243, 232, 0.45);
+      text-decoration: none;
       transition: color .2s;
     }
-    .footer-links a:hover { color: var(--cream); }
-    .footer-bottom {
-      border-top: 1px solid rgba(250,243,232,0.08);
-      padding-top: 28px; display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px;
+
+    .footer-links a:hover {
+      color: var(--cream);
     }
-    .footer-copy { font-size: 0.78rem; color: rgba(250,243,232,0.3); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(250, 243, 232, 0.08);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(250, 243, 232, 0.3);
+    }
+
     .footer-ig {
-      font-size: 0.78rem; color: var(--gold); letter-spacing: 0.1em;
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
       text-decoration: none;
     }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     .reveal {
-      opacity: 0; transform: translateY(28px);
+      opacity: 0;
+      transform: translateY(28px);
       transition: opacity .7s ease, transform .7s ease;
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .preview-inner { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
-      .hero-stats { gap: 32px; }
+      .nav-links {
+        display: none;
+      }
+
+      .preview-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .hero-stats {
+        gap: 32px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">Band<span>han</span></a>
-  <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#preview">Preview</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#cta-banner" class="nav-cta">Get Started</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Band<span>han</span></a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#preview">Preview</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cta-banner" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg-pattern"></div>
-  <!-- Floating petals -->
-  <div class="petal" style="left:8%;background:#E07820;animation-duration:7s;animation-delay:0s;"></div>
-  <div class="petal" style="left:20%;background:#C9993A;animation-duration:9s;animation-delay:1.5s;"></div>
-  <div class="petal" style="left:55%;background:#8B2020;opacity:0.3;animation-duration:8s;animation-delay:0.5s;"></div>
-  <div class="petal" style="left:75%;background:#E07820;animation-duration:6.5s;animation-delay:2s;"></div>
-  <div class="petal" style="left:88%;background:#C9993A;animation-duration:10s;animation-delay:3s;"></div>
-  <div class="petal" style="left:35%;background:#E07820;animation-duration:7.5s;animation-delay:1s;"></div>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-pattern"></div>
+    <!-- Floating petals -->
+    <div class="petal" style="left:8%;background:#E07820;animation-duration:7s;animation-delay:0s;"></div>
+    <div class="petal" style="left:20%;background:#C9993A;animation-duration:9s;animation-delay:1.5s;"></div>
+    <div class="petal" style="left:55%;background:#8B2020;opacity:0.3;animation-duration:8s;animation-delay:0.5s;">
+    </div>
+    <div class="petal" style="left:75%;background:#E07820;animation-duration:6.5s;animation-delay:2s;"></div>
+    <div class="petal" style="left:88%;background:#C9993A;animation-duration:10s;animation-delay:3s;"></div>
+    <div class="petal" style="left:35%;background:#E07820;animation-duration:7.5s;animation-delay:1s;"></div>
 
-  <span class="hero-badge">✦ Beautiful Wedding Websites for Indian Couples ✦</span>
-  <h1 class="hero-title">Your Love Story<br>Deserves a <em>Beautiful</em><br>Digital Home</h1>
-  <!-- <p class="hero-subtitle-hindi">शादी के हर पल को करें ऑनलाइन यादगार</p> -->
-  <p class="hero-desc">
-    Give your wedding a beautiful home online so you can stop answering the same WhatsApp message 200 times.
-  </p>
-  <div class="hero-btns">
-    <a href="#pricing" class="btn-primary">See your website free --></a>
-    <a href="https://wa.me/919999999999" class="btn-outline">💬 Chat on WhatsApp</a>
-  </div>
-  <div class="hero-divider"></div>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <span class="hero-stat-num">2000+</span>
-      <span class="hero-stat-label">Couples Served</span>
+    <span class="hero-badge">✦ Beautiful Wedding Websites for Indian Couples ✦</span>
+    <h1 class="hero-title">Your Love Story<br>Deserves a <em>Beautiful</em><br>Digital Home</h1>
+    <!-- <p class="hero-subtitle-hindi">शादी के हर पल को करें ऑनलाइन यादगार</p> -->
+    <p class="hero-desc">
+      Give your wedding a beautiful home online so you can stop answering the same WhatsApp message 200 times.
+    </p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">See your website free --></a>
+      <a href="https://wa.me/919999999999" class="btn-outline">💬 Chat on WhatsApp</a>
     </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">48 hrs</span>
-      <span class="hero-stat-label">Average Delivery</span>
-    </div>
-    <!-- <div class="hero-stat">
+    <div class="hero-divider"></div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">2000+</span>
+        <span class="hero-stat-label">Couples Served</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">48 hrs</span>
+        <span class="hero-stat-label">Average Delivery</span>
+      </div>
+      <!-- <div class="hero-stat">
       <span class="hero-stat-num">₹999</span>
       <span class="hero-stat-label">Starting Price</span>
     </div> -->
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="reveal">
-    <!-- <span class="section-tag">The Process</span> -->
-    <div class="gold-rule"></div>
-    <h2 class="section-title">Planning a wedding is beautiful. <em>The logistics are not.</em></h2>
-    <!-- <p class="section-body">Getting your wedding website live is effortless. Here's all it takes.</p> -->
-  </div>
-  <div class="steps-grid">
-    <div class="step reveal">
-      <!-- <div class="step-num">01</div> -->
-      <!-- <div class="step-title">Fill a Simple Form</div> -->
-      <p class="step-title">Your Sangeet is Friday, wedding is Sunday and <strong>half your guests don't know where the venue is.</strong></p>
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="reveal">
+      <!-- <span class="section-tag">The Process</span> -->
+      <div class="gold-rule"></div>
+      <h2 class="section-title">Planning a wedding is beautiful.<br><em>The logistics are not.</em></h2>
+      <!-- <p class="section-body">Getting your wedding website live is effortless. Here's all it takes.</p> -->
     </div>
-    <div class="step reveal">
-      <!-- <div class="step-num">02</div> -->
-      <div class="step-title">You've sent the venue address on WhatsApp <strong>at least 20 times.</strong> And someone still called to ask.</p></div>
-      <!-- <p class="step-desc">Our team crafts your personalised wedding website — design, content, RSVP, maps, and more.</p> -->
-    </div>
-    <!-- <div class="step reveal">
+    <div class="steps-grid">
+      <div class="step reveal">
+        <!-- <div class="step-num">01</div> -->
+        <!-- <div class="step-title">Fill a Simple Form</div> -->
+        <p class="step-title">Your Sangeet is Friday, wedding is Sunday and <strong>half your guests don't know where
+            the venue is.</strong></p>
+      </div>
+      <div class="step reveal">
+        <!-- <div class="step-num">02</div> -->
+        <div class="step-title">You've sent the venue address on WhatsApp <strong>at least 20 times.</strong> And
+          someone still called to ask.</p>
+        </div>
+        <!-- <p class="step-desc">Our team crafts your personalised wedding website — design, content, RSVP, maps, and more.</p> -->
+      </div>
+      <!-- <div class="step reveal">
       <div class="step-num">04</div>
       <div class="step-title">We Stay with You</div>
       <p class="step-desc">Need to update venue details or add a new event? We've got you covered until the big day and beyond.</p>
     </div> -->
-  </div>
-  <br>
-      <div class="reveal">
+    </div>
+    <br>
+    <div class="reveal">
       <!-- <div class="step-num">03</div> -->
       <div class="section-title"><strong><em>There's a better way to bring everyone together...</em></strong></div>
       <!-- <p class="step-desc">Get a shareable link (or custom domain) and send it to all your guests. That's it!</p> -->
     </div>
-</section>
-
-<section id="how">
-  <div class="reveal">
-    <span class="section-tag">The Solution</span>
-    <div class="gold-rule"></div>
-    <h2 class="section-title">One link<br><em>Everything your guests need</em><br>No more chaos.</h2>
-    <!-- <p class="section-body">Getting your wedding website live is effortless. Here's all it takes.</p> -->
-  </div>
-    <div class="steps-grid">
-
-        <p class="">
-        Creates a <strong>beautiful, personalised website</strong> your guests can open on their phone - with your venue on a map, events with dates and times, an RSVP button, your love story, your photos, and even a countdown for your big day!<br><br>
-        <strong>One link shared on WhatsApp. That's it.</strong>
-      </p>
-            <div class="faded-text">"Even dadi ji found the venue herself"</div>
+  </section>
+  <section id="how">
+    <div class="reveal">
+      <span class="section-tag">The Solution</span>
+      <div class="gold-rule"></div>
+      <h2 class="section-title">One link<br><em>Everything your guests need</em><br>No more chaos.</h2>
+      <div class="steps-grid">
+        <p class="step-title">
+          A <strong>beautiful, personalised website</strong> your guests can open on their phone - find venue on maps,
+          events with dates & times, an RSVP button, your love story, your photos, and even a countdown for your big
+          day!<br><br>
+          <strong>One link shared on WhatsApp. That's it.</strong>
+        </p>
+        <div class="faded-text">"Even dadi ji found the venue herself"</div>
       </div>
-  <!-- <div class="steps-grid">
+      <!-- <p class="section-body">Getting your wedding website live is effortless. Here's all it takes.</p> -->
+    </div>
+    <!-- <div class="steps-grid">
     <div class="step reveal">
       <div class="step-num">01</div>
       <div class="step-title">Fill a Simple Form</div>
@@ -666,336 +1239,367 @@
       <p class="step-desc">Need to update venue details or add a new event? We've got you covered until the big day and beyond.</p>
     </div>
   </div> -->
-</section>
+  </section>
 
-<!-- FEATURES -->
-<section id="features">
-  <div class="reveal">
-    <span class="section-tag">What You Get</span>
-    <div class="gold-rule"></div>
-    <h2 class="section-title">Everything Your Guests<br>Need, <em>All in One Place</em></h2>
-    <p class="section-body">Every Bandhan site is packed with features that make your wedding planning — and your guests' experience — seamless.</p>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card reveal">
-      <span class="feature-icon">💌</span>
-      <div class="feature-title">RSVP System</div>
-      <p class="feature-desc">Guests can confirm attendance with a single tap. No spreadsheets, no confusion — responses land in your inbox instantly.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🗺️</span>
-      <div class="feature-title">Interactive Venue Maps</div>
-      <p class="feature-desc">Embed Google Maps directly on the site so guests can get directions with one tap — no more lost uncles!</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">📅</span>
-      <div class="feature-title">Add to Calendar</div>
-      <p class="feature-desc">Guests can add your Mehndi, Sangeet, and Wedding events to their Google or Apple Calendar in one click.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🎵</span>
-      <div class="feature-title">Background Music</div>
-      <p class="feature-desc">Set the mood with your favourite wedding song playing softly in the background when guests open your site.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">📸</span>
-      <div class="feature-title">Photo Gallery</div>
-      <p class="feature-desc">Showcase your pre-wedding shoot, engagement photos, and couple pictures in a gorgeous gallery your guests will love.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">💬</span>
-      <div class="feature-title">WhatsApp Invite Link</div>
-      <p class="feature-desc">Share your wedding website link via WhatsApp with ready-to-send copy. Works beautifully on every phone.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🌐</span>
-      <div class="feature-title">Custom Domain</div>
-      <p class="feature-desc">Get a URL like <em>preetiwedsashutosh.com</em> — something personal and memorable for your guests to visit.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🕐</span>
-      <div class="feature-title">Live Countdown</div>
-      <p class="feature-desc">A beautiful live countdown to your wedding day keeps the excitement building for both you and your guests.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing">
-  <div class="reveal">
-    <span class="section-tag">Plans & Pricing</span>
-    <div class="gold-rule"></div>
-    <h2 class="section-title">Simple Pricing.<br><em>No Surprises.</em></h2>
-    <p class="section-body">All plans include mobile-optimised design and WhatsApp sharing. Pick what fits your wedding.</p>
-  </div>
-  <div class="pricing-grid">
-
-    <!-- STARTER -->
-    <div class="pricing-card reveal">
-      <div class="plan-name">Starter</div>
-      <div class="plan-title">Shubh Aarambh</div>
-      <div class="plan-price">₹999 – ₹1,999</div>
-      <div class="plan-price-note">One-time payment · Live in 72 hrs</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li>Beautiful template-based wedding site</li>
-        <li>RSVP form with email notifications</li>
-        <li>Venue location with Google Maps</li>
-        <li>Add to Calendar (Google & Apple)</li>
-        <li>Live wedding countdown timer</li>
-        <li>Couple story section</li>
-        <li>Mobile-optimised & shareable link</li>
-        <li>WhatsApp invite copy included</li>
-        <li>1 round of edits</li>
-      </ul>
-      <a href="#cta-banner" class="plan-cta plan-cta-outline">Get Started</a>
-      <p class="plan-delivery">Delivered in 48–72 hours</p>
-    </div>
-
-    <!-- PRO -->
-    <div class="pricing-card featured reveal">
-      <div class="plan-badge">✦ Most Popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-title">Shaadi Wali Baat</div>
-      <div class="plan-price">₹2,999 – ₹5,999</div>
-      <div class="plan-price-note">One-time payment · Live in 48 hrs</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li>Everything in Starter, plus —</li>
-        <li>Custom design tweaks (colours, fonts, style)</li>
-        <li>Photo gallery (pre-wedding & couple pics)</li>
-        <li>Background music of your choice</li>
-        <li>WhatsApp invite message + shareable link</li>
-        <li>Multiple events page (Mehndi, Sangeet, Reception)</li>
-        <li>Custom domain (e.g. preetiwedsashutosh.com)</li>
-        <li>Accommodation & travel info section</li>
-        <li>3 rounds of edits</li>
-      </ul>
-      <a href="#cta-banner" class="plan-cta plan-cta-solid">Get Started</a>
-      <p class="plan-delivery">Delivered in 24–48 hours</p>
-    </div>
-
-    <!-- PREMIUM -->
-    <div class="pricing-card reveal">
-      <div class="plan-name">Premium</div>
-      <div class="plan-title">Shaahi Dulhan</div>
-      <div class="plan-price">₹7,000 – ₹15,000</div>
-      <div class="plan-price-note">One-time payment · Live in 24 hrs</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li>Everything in Pro, plus —</li>
-        <li>Fully custom-designed site (unique to you)</li>
-        <li>Multiple pages with full event details & maps</li>
-        <li>Video embed / reel section</li>
-        <li>Guest wishes & guestbook wall</li>
-        <li>Dress code & gift registry section</li>
-        <li>Fast 24-hr delivery guaranteed</li>
-        <li>Priority WhatsApp support</li>
-        <li>Unlimited edits until wedding day</li>
-      </ul>
-      <a href="#cta-banner" class="plan-cta plan-cta-outline">Get Started</a>
-      <p class="plan-delivery">Delivered in 24 hours</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- PREVIEW -->
-<section id="preview">
-  <div class="preview-inner">
-    <div class="preview-mockup reveal">
-      <div class="mockup-header">
-        <div class="mockup-header-title">Together Forever</div>
-        <div class="mockup-header-names">Preeti & Ashutosh</div>
-        <div class="mockup-header-date">12 · 02 · 2025 · JAIPUR</div>
-      </div>
-      <div class="mockup-body">
-        <div class="mockup-section">
-          <div class="mockup-section-title">📅 Our Events</div>
-          <div class="mockup-section-body">
-            Mehndi · Fri 10 Feb · Jaipur<br>
-            Sangeet · Sat 11 Feb · Pink Pearl Palace<br>
-            Wedding · Sun 12 Feb · 11:00 AM
-          </div>
-          <div class="mockup-btn">Add to Calendar</div>
-        </div>
-        <div class="mockup-section">
-          <div class="mockup-section-title">🗺️ Venue Location</div>
-          <div class="mockup-map"></div>
-          <div class="mockup-btn">Get Directions</div>
-        </div>
-        <div class="mockup-section">
-          <div class="mockup-section-title">💌 RSVP</div>
-          <div class="mockup-section-body">Are you joining us? Let us know below.</div>
-          <div class="mockup-btn">Confirm Attendance</div>
-        </div>
-      </div>
-    </div>
+  <!-- FEATURES -->
+  <section id="features">
     <div class="reveal">
-      <span class="section-tag">See it in action</span>
+      <span class="section-tag">What You Get</span>
       <div class="gold-rule"></div>
-      <h2 class="section-title">A Website as<br><em>Unique as Your</em><br>Love Story</h2>
-      <div class="preview-points">
-        <div class="preview-point">
-          <div class="preview-point-icon">🎨</div>
-          <div>
-            <div class="preview-point-title">Made to Match Your Shaadi Theme</div>
-            <p class="preview-point-desc">Whether it's a royal Rajasthani backdrop or a modern minimalist look — we design it to feel like you.</p>
+      <h2 class="section-title">Everything Your Guests<br>Need, <em>All in One Place</em></h2>
+      <p class="section-body">Every Bandhan site is packed with features that make your wedding planning — and your
+        guests' experience — seamless.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">💌</span>
+        <div class="feature-title">RSVP System</div>
+        <p class="feature-desc">Guests can confirm attendance with a single tap. No spreadsheets, no confusion —
+          responses land in your inbox instantly.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🗺️</span>
+        <div class="feature-title">Interactive Venue Maps</div>
+        <p class="feature-desc">Embed Google Maps directly on the site so guests can get directions with one tap — no
+          more lost uncles!</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📅</span>
+        <div class="feature-title">Add to Calendar</div>
+        <p class="feature-desc">Guests can add your Mehndi, Sangeet, and Wedding events to their Google or Apple
+          Calendar in one click.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🎵</span>
+        <div class="feature-title">Background Music</div>
+        <p class="feature-desc">Set the mood with your favourite wedding song playing softly in the background when
+          guests open your site.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📸</span>
+        <div class="feature-title">Photo Gallery</div>
+        <p class="feature-desc">Showcase your pre-wedding shoot, engagement photos, and couple pictures in a gorgeous
+          gallery your guests will love.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">💬</span>
+        <div class="feature-title">WhatsApp Invite Link</div>
+        <p class="feature-desc">Share your wedding website link via WhatsApp with ready-to-send copy. Works beautifully
+          on every phone.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🌐</span>
+        <div class="feature-title">Custom Domain</div>
+        <p class="feature-desc">Get a URL like <em>preetiwedsashutosh.com</em> — something personal and memorable for
+          your guests to visit.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🕐</span>
+        <div class="feature-title">Live Countdown</div>
+        <p class="feature-desc">A beautiful live countdown to your wedding day keeps the excitement building for both
+          you and your guests.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="reveal">
+      <span class="section-tag">Plans & Pricing</span>
+      <div class="gold-rule"></div>
+      <h2 class="section-title">Simple Pricing.<br><em>No Surprises.</em></h2>
+      <p class="section-body">All plans include mobile-optimised design and WhatsApp sharing. Pick what fits your
+        wedding.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- STARTER -->
+      <div class="pricing-card reveal">
+        <div class="plan-name">Starter</div>
+        <div class="plan-title">Shubh Aarambh</div>
+        <div class="plan-price">₹999 – ₹1,999</div>
+        <div class="plan-price-note">One-time payment · Live in 72 hrs</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Beautiful template-based wedding site</li>
+          <li>RSVP form with email notifications</li>
+          <li>Venue location with Google Maps</li>
+          <li>Add to Calendar (Google & Apple)</li>
+          <li>Live wedding countdown timer</li>
+          <li>Couple story section</li>
+          <li>Mobile-optimised & shareable link</li>
+          <li>WhatsApp invite copy included</li>
+          <li>1 round of edits</li>
+        </ul>
+        <a href="#cta-banner" class="plan-cta plan-cta-outline">Get Started</a>
+        <p class="plan-delivery">Delivered in 48–72 hours</p>
+      </div>
+
+      <!-- PRO -->
+      <div class="pricing-card featured reveal">
+        <div class="plan-badge">✦ Most Popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-title">Shaadi Wali Baat</div>
+        <div class="plan-price">₹2,999 – ₹5,999</div>
+        <div class="plan-price-note">One-time payment · Live in 48 hrs</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Everything in Starter, plus —</li>
+          <li>Custom design tweaks (colours, fonts, style)</li>
+          <li>Photo gallery (pre-wedding & couple pics)</li>
+          <li>Background music of your choice</li>
+          <li>WhatsApp invite message + shareable link</li>
+          <li>Multiple events page (Mehndi, Sangeet, Reception)</li>
+          <li>Custom domain (e.g. preetiwedsashutosh.com)</li>
+          <li>Accommodation & travel info section</li>
+          <li>3 rounds of edits</li>
+        </ul>
+        <a href="#cta-banner" class="plan-cta plan-cta-solid">Get Started</a>
+        <p class="plan-delivery">Delivered in 24–48 hours</p>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="pricing-card reveal">
+        <div class="plan-name">Premium</div>
+        <div class="plan-title">Shaahi Dulhan</div>
+        <div class="plan-price">₹7,000 – ₹15,000</div>
+        <div class="plan-price-note">One-time payment · Live in 24 hrs</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Everything in Pro, plus —</li>
+          <li>Fully custom-designed site (unique to you)</li>
+          <li>Multiple pages with full event details & maps</li>
+          <li>Video embed / reel section</li>
+          <li>Guest wishes & guestbook wall</li>
+          <li>Dress code & gift registry section</li>
+          <li>Fast 24-hr delivery guaranteed</li>
+          <li>Priority WhatsApp support</li>
+          <li>Unlimited edits until wedding day</li>
+        </ul>
+        <a href="#cta-banner" class="plan-cta plan-cta-outline">Get Started</a>
+        <p class="plan-delivery">Delivered in 24 hours</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PREVIEW -->
+  <section id="preview">
+    <div class="preview-inner">
+      <div class="preview-mockup reveal">
+        <div class="mockup-header">
+          <div class="mockup-header-title">Together Forever</div>
+          <div class="mockup-header-names">Preeti & Ashutosh</div>
+          <div class="mockup-header-date">12 · 02 · 2025 · JAIPUR</div>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-section">
+            <div class="mockup-section-title">📅 Our Events</div>
+            <div class="mockup-section-body">
+              Mehndi · Fri 10 Feb · Jaipur<br>
+              Sangeet · Sat 11 Feb · Pink Pearl Palace<br>
+              Wedding · Sun 12 Feb · 11:00 AM
+            </div>
+            <div class="mockup-btn">Add to Calendar</div>
+          </div>
+          <div class="mockup-section">
+            <div class="mockup-section-title">🗺️ Venue Location</div>
+            <div class="mockup-map"></div>
+            <div class="mockup-btn">Get Directions</div>
+          </div>
+          <div class="mockup-section">
+            <div class="mockup-section-title">💌 RSVP</div>
+            <div class="mockup-section-body">Are you joining us? Let us know below.</div>
+            <div class="mockup-btn">Confirm Attendance</div>
           </div>
         </div>
-        <div class="preview-point">
-          <div class="preview-point-icon">📱</div>
-          <div>
-            <div class="preview-point-title">Perfect on Every Phone</div>
-            <p class="preview-point-desc">Your relatives will open it on a WhatsApp forward — it'll look stunning on every device, every screen size.</p>
+      </div>
+      <div class="reveal">
+        <span class="section-tag">See it in action</span>
+        <div class="gold-rule"></div>
+        <h2 class="section-title">A Website as<br><em>Unique as Your</em><br>Love Story</h2>
+        <div class="preview-points">
+          <div class="preview-point">
+            <div class="preview-point-icon">🎨</div>
+            <div>
+              <div class="preview-point-title">Made to Match Your Shaadi Theme</div>
+              <p class="preview-point-desc">Whether it's a royal Rajasthani backdrop or a modern minimalist look — we
+                design it to feel like you.</p>
+            </div>
           </div>
-        </div>
-        <div class="preview-point">
-          <div class="preview-point-icon">⚡</div>
-          <div>
-            <div class="preview-point-title">Live in Under 48 Hours</div>
-            <p class="preview-point-desc">We move fast. Most websites go live within 24–48 hours of your order — plenty of time before invites go out.</p>
+          <div class="preview-point">
+            <div class="preview-point-icon">📱</div>
+            <div>
+              <div class="preview-point-title">Perfect on Every Phone</div>
+              <p class="preview-point-desc">Your relatives will open it on a WhatsApp forward — it'll look stunning on
+                every device, every screen size.</p>
+            </div>
+          </div>
+          <div class="preview-point">
+            <div class="preview-point-icon">⚡</div>
+            <div>
+              <div class="preview-point-title">Live in Under 48 Hours</div>
+              <p class="preview-point-desc">We move fast. Most websites go live within 24–48 hours of your order —
+                plenty of time before invites go out.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="reveal" style="text-align:center">
-    <span class="section-tag">Love from Couples</span>
-    <div class="gold-rule" style="margin:0 auto 32px;"></div>
-    <h2 class="section-title">What Couples Are Saying</h2>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card reveal">
-      <span class="testimonial-quote">"</span>
-      <p class="testimonial-text">Our guests couldn't stop talking about the website. Dadi ji called us to say she found the venue on the map herself. Worth every rupee!</p>
-      <div class="testimonial-couple">Riya & Kabir</div>
-      <div class="testimonial-location">Mumbai · Pro Plan</div>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="reveal" style="text-align:center">
+      <span class="section-tag">Love from Couples</span>
+      <div class="gold-rule" style="margin:0 auto 32px;"></div>
+      <h2 class="section-title">What Couples Are Saying</h2>
     </div>
-    <div class="testimonial-card reveal">
-      <span class="testimonial-quote">"</span>
-      <p class="testimonial-text">I was worried it'd be complicated but we got our site link within 24 hours. The RSVP feature saved us so much time on calls. Absolutely loved it.</p>
-      <div class="testimonial-couple">Pooja & Arjun</div>
-      <div class="testimonial-location">Bengaluru · Premium Plan</div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">Our guests couldn't stop talking about the website. Dadi ji called us to say she
+          found the venue on the map herself. Worth every rupee!</p>
+        <div class="testimonial-couple">Riya & Kabir</div>
+        <div class="testimonial-location">Mumbai · Pro Plan</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">I was worried it'd be complicated but we got our site link within 24 hours. The RSVP
+          feature saved us so much time on calls. Absolutely loved it.</p>
+        <div class="testimonial-couple">Pooja & Arjun</div>
+        <div class="testimonial-location">Bengaluru · Premium Plan</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">Sent the link over WhatsApp to 200+ people and the responses just came in
+          automatically. No calling around. Magical experience!</p>
+        <div class="testimonial-couple">Sneha & Dev</div>
+        <div class="testimonial-location">Delhi · Starter Plan</div>
+      </div>
     </div>
-    <div class="testimonial-card reveal">
-      <span class="testimonial-quote">"</span>
-      <p class="testimonial-text">Sent the link over WhatsApp to 200+ people and the responses just came in automatically. No calling around. Magical experience!</p>
-      <div class="testimonial-couple">Sneha & Dev</div>
-      <div class="testimonial-location">Delhi · Starter Plan</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- FAQ -->
-<section id="faq">
-  <div class="reveal">
-    <span class="section-tag">Questions</span>
-    <div class="gold-rule"></div>
-    <h2 class="section-title">Things People Ask <em>Us</em></h2>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">How long does it take to get my website? <span>+</span></div>
-      <div class="faq-a">Starter plans are typically delivered in 48–72 hours. Pro plans in 24–48 hours. Premium plans are delivered in 24 hours with priority support. We'll confirm your timeline via WhatsApp after your order.</div>
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="reveal">
+      <span class="section-tag">Questions</span>
+      <div class="gold-rule"></div>
+      <h2 class="section-title">Things People Ask <em>Us</em></h2>
     </div>
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">Can I get a custom domain like preetiwedsashutosh.com? <span>+</span></div>
-      <div class="faq-a">Yes! Custom domains are included in the Pro and Premium plans. We handle the domain setup for you — all you need to do is choose a name you love. Domain registration charges (typically ₹800–₹1,200/year) are included in the plan price.</div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does it take to get my website? <span>+</span></div>
+        <div class="faq-a">Starter plans are typically delivered in 48–72 hours. Pro plans in 24–48 hours. Premium plans
+          are delivered in 24 hours with priority support. We'll confirm your timeline via WhatsApp after your order.
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I get a custom domain like preetiwedsashutosh.com?
+          <span>+</span>
+        </div>
+        <div class="faq-a">Yes! Custom domains are included in the Pro and Premium plans. We handle the domain setup for
+          you — all you need to do is choose a name you love. Domain registration charges (typically ₹800–₹1,200/year)
+          are included in the plan price.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">What if I need changes after the site is live? <span>+</span></div>
+        <div class="faq-a">Starter includes 1 round of edits. Pro includes 3 rounds. Premium includes unlimited edits
+          until your wedding day. Just message us on WhatsApp and we'll update it within a few hours.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">How long will my website stay live? <span>+</span></div>
+        <div class="faq-a">Your website stays live for 12 months from the date of your wedding. After that, you can
+          renew hosting at a small annual fee if you'd like to keep it as a memento.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you work with all wedding budgets and religions? <span>+</span>
+        </div>
+        <div class="faq-a">Absolutely. We've built sites for Hindu, Muslim, Sikh, Christian, and inter-faith weddings
+          across India and abroad. We celebrate all love stories with equal joy and care.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I pay? <span>+</span></div>
+        <div class="faq-a">We accept UPI (GPay, PhonePe, Paytm), bank transfer, and all major debit/credit cards.
+          Payment is 100% upfront, and we'll send you a proper invoice.</div>
+      </div>
     </div>
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">What if I need changes after the site is live? <span>+</span></div>
-      <div class="faq-a">Starter includes 1 round of edits. Pro includes 3 rounds. Premium includes unlimited edits until your wedding day. Just message us on WhatsApp and we'll update it within a few hours.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">How long will my website stay live? <span>+</span></div>
-      <div class="faq-a">Your website stays live for 12 months from the date of your wedding. After that, you can renew hosting at a small annual fee if you'd like to keep it as a memento.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">Do you work with all wedding budgets and religions? <span>+</span></div>
-      <div class="faq-a">Absolutely. We've built sites for Hindu, Muslim, Sikh, Christian, and inter-faith weddings across India and abroad. We celebrate all love stories with equal joy and care.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I pay? <span>+</span></div>
-      <div class="faq-a">We accept UPI (GPay, PhonePe, Paytm), bank transfer, and all major debit/credit cards. Payment is 100% upfront, and we'll send you a proper invoice.</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA BANNER -->
-<section id="cta-banner">
-  <span class="section-tag">Let's Begin</span>
-  <h2 class="section-title" style="margin:0 auto 16px;max-width:700px;text-align:center;">
-    Ready to Give Your<br>Wedding a <em>Digital Home?</em>
-  </h2>
-  <p class="section-body" style="text-align:center;">
-    Hundreds of Indian couples have already shared their love story with Bandhan. Yours should be next.
-  </p>
-  <div class="cta-actions">
-    <a href="https://wa.me/919999999999?text=Hi!%20I'd%20like%20to%20get%20a%20wedding%20website%20made%20by%20Bandhan" class="btn-cream">💬 Chat on WhatsApp</a>
-    <a href="mailto:hello@bandhanweds.in" class="btn-ghost">📧 Email Us</a>
-  </div>
-  <p class="whatsapp-note">Or DM us on Instagram at <a href="https://instagram.com/bandhanwedsite">@bandhanwedsite</a> · We reply within 2 hours</p>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <span class="footer-logo">Band<span>han</span></span>
-      <p class="footer-desc">Beautiful, affordable wedding websites for Indian couples — because your love story deserves more than a WhatsApp forward.</p>
+  <!-- CTA BANNER -->
+  <section id="cta-banner">
+    <span class="section-tag">Let's Begin</span>
+    <h2 class="section-title" style="margin:0 auto 16px;max-width:700px;text-align:center;">
+      Ready to Give Your<br>Wedding a <em>Digital Home?</em>
+    </h2>
+    <p class="section-body" style="text-align:center;">
+      Hundreds of Indian couples have already shared their love story with Bandhan. Yours should be next.
+    </p>
+    <div class="cta-actions">
+      <a href="https://wa.me/919999999999?text=Hi!%20I'd%20like%20to%20get%20a%20wedding%20website%20made%20by%20Bandhan"
+        class="btn-cream">💬 Chat on WhatsApp</a>
+      <a href="mailto:hello@bandhanweds.in" class="btn-ghost">📧 Email Us</a>
     </div>
-    <div>
-      <div class="footer-col-title">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#preview">Preview</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Contact</div>
-      <ul class="footer-links">
-        <li><a href="https://wa.me/919999999999">WhatsApp Us</a></li>
-        <li><a href="mailto:hello@bandhanweds.in">hello@bandhanweds.in</a></li>
-        <li><a href="https://instagram.com/bandhanwedsite">@bandhanwedsite</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Refund Policy</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2025 MyShaadiStory. Made with ❤️ in India.</span>
-    <a href="https://instagram.com/bandhanwedsite" class="footer-ig">@bandhanwedsite</a>
-  </div>
-</footer>
+    <p class="whatsapp-note">Or DM us on Instagram at <a href="https://instagram.com/bandhanwedsite">@bandhanwedsite</a>
+      · We reply within 2 hours</p>
+  </section>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <span class="footer-logo">Band<span>han</span></span>
+        <p class="footer-desc">Beautiful, affordable wedding websites for Indian couples — because your love story
+          deserves more than a WhatsApp forward.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#preview">Preview</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/919999999999">WhatsApp Us</a></li>
+          <li><a href="mailto:hello@bandhanweds.in">hello@bandhanweds.in</a></li>
+          <li><a href="https://instagram.com/bandhanwedsite">@bandhanwedsite</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 MyShaadiStory. Made with ❤️ in India.</span>
+      <a href="https://instagram.com/bandhanwedsite" class="footer-ig">@bandhanwedsite</a>
+    </div>
+  </footer>
 
-  // FAQ toggle
-  function toggleFaq(el) {
-    const item = el.parentElement;
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
-  }
-</script>
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // FAQ toggle
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+  </script>
 </body>
+
 </html>
