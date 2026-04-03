@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -23,7 +23,7 @@
       /* ── Brand primaries ── */
       --garnet: #6B1530;
       /* single jewel red — rosewood */
-      --garnet-deep: #3D0A1B;
+      --garnet-deep: #4A1020;
       /* dark surfaces: dark sections & section bgs */
       --ink: #1A080F;
       /* near-black warm */
@@ -41,9 +41,9 @@
       --cream-dark: #EDD9B0;
       --white: #FFFCF4;
 
-      /* ── Cool accent ── */
-      --dusty-teal: #2E6B6A;
-      --dusty-teal-lt: #5A9E9D;
+      /* ── Warm accent ── */
+      --dusty-teal: #8A4A2C;
+      --dusty-teal-lt: #B8704A;
 
       /* ── Text ── */
       --text-dark: #1C0A08;
@@ -72,7 +72,9 @@
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -80,7 +82,7 @@
       padding: 0 6%;
       height: 72px;
       background: transparent;
-      transition: background .45s ease, box-shadow .45s ease;
+      transition: background .45s ease, box-shadow .45s ease, transform .35s ease;
     }
 
     nav.nav--scrolled {
@@ -389,12 +391,16 @@
     /* ── HOW IT WORKS ── */
     #how {
       background: var(--white);
+      padding-top: 72px;
+      padding-bottom: 72px;
     }
 
 
     /* ── SOLUTION ── */
     #how2 {
       background: var(--cream);
+      padding-top: 80px;
+      padding-bottom: 80px;
     }
 
     #how2 .section-tag {
@@ -503,16 +509,29 @@
       gap: 1px;
       height: 8px;
     }
+
     .sig-bars span {
       display: block;
       width: 2px;
       background: #000;
       border-radius: 1px;
     }
-    .sig-bars span:nth-child(1) { height: 3px; }
-    .sig-bars span:nth-child(2) { height: 5px; }
-    .sig-bars span:nth-child(3) { height: 7px; }
-    .sig-bars span:nth-child(4) { height: 9px; }
+
+    .sig-bars span:nth-child(1) {
+      height: 3px;
+    }
+
+    .sig-bars span:nth-child(2) {
+      height: 5px;
+    }
+
+    .sig-bars span:nth-child(3) {
+      height: 7px;
+    }
+
+    .sig-bars span:nth-child(4) {
+      height: 9px;
+    }
 
     /* WiFi icon */
     .wifi-icon {
@@ -523,6 +542,7 @@
       align-items: flex-end;
       justify-content: center;
     }
+
     .wifi-icon::before,
     .wifi-icon::after {
       content: '';
@@ -531,10 +551,22 @@
       border-bottom: none;
       border-radius: 50% 50% 0 0;
     }
-    .wifi-icon::before { width: 9px; height: 5px; top: 0; }
-    .wifi-icon::after  { width: 5px; height: 3px; top: 3px; }
+
+    .wifi-icon::before {
+      width: 9px;
+      height: 5px;
+      top: 0;
+    }
+
+    .wifi-icon::after {
+      width: 5px;
+      height: 3px;
+      top: 3px;
+    }
+
     .wifi-dot {
-      width: 2px; height: 2px;
+      width: 2px;
+      height: 2px;
       background: #000;
       border-radius: 50%;
       margin-bottom: 0;
@@ -546,6 +578,7 @@
       align-items: center;
       gap: 1px;
     }
+
     .battery-body {
       width: 16px;
       height: 8px;
@@ -553,12 +586,14 @@
       border-radius: 2px;
       padding: 1px;
     }
+
     .battery-fill {
       width: 75%;
       height: 100%;
       background: #000;
       border-radius: 1px;
     }
+
     .battery-tip {
       width: 2px;
       height: 4px;
@@ -601,6 +636,31 @@
       overflow: hidden;
       flex: 1;
       min-height: 0;
+      position: relative;
+    }
+
+    .video-mute-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s;
+    }
+
+    .video-mute-btn:hover {
+      background: rgba(0,0,0,0.75);
     }
 
     .phone-video-wrap video {
@@ -702,9 +762,11 @@
     .w2-hero-photo::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 60px;
-      background: linear-gradient(transparent, rgba(255,255,255,0.15));
+      background: linear-gradient(transparent, rgba(255, 255, 255, 0.15));
     }
 
     .w2-icon-nav {
@@ -727,9 +789,13 @@
       border-right: 1px solid #f0f0f0;
     }
 
-    .w2-icon-nav-item:last-child { border-right: none; }
+    .w2-icon-nav-item:last-child {
+      border-right: none;
+    }
 
-    .w2-icon { font-size: 1rem; }
+    .w2-icon {
+      font-size: 1rem;
+    }
 
     .w2-cta {
       background: var(--garnet);
@@ -761,47 +827,51 @@
 
     .how2-feature-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
+      font-size: 2.4rem;
       font-weight: 600;
       color: var(--text-dark);
-      line-height: 1.2;
-      margin-bottom: 16px;
+      line-height: 1.15;
+      margin-bottom: 20px;
     }
 
     .how2-feature-body {
-      font-size: 0.92rem;
+      font-size: 1rem;
       color: var(--text-mid);
-      line-height: 1.8;
-      margin-bottom: 36px;
+      line-height: 1.75;
+      margin-bottom: 40px;
     }
 
     .how2-checklist {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 0;
     }
 
     .how2-checklist li {
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-size: 0.9rem;
-      font-weight: 500;
+      gap: 16px;
+      font-size: 1rem;
+      font-weight: 400;
       color: var(--text-dark);
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(196, 146, 28, 0.15);
+    }
+
+    .how2-checklist li:first-child {
+      border-top: 1px solid rgba(196, 146, 28, 0.15);
     }
 
     .how2-check {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      min-width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--gold);
-      color: var(--white);
-      font-size: 0.6rem;
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      color: var(--gold);
+      font-size: 1rem;
       font-weight: 700;
     }
 
@@ -815,20 +885,23 @@
 
     .steps-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 80px 40px;
-      margin-top: 64px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 56px;
+      margin-top: 28px;
       overflow: visible;
-      padding: 16px 0 40px;
+      padding: 60px 0 80px;
+      max-width: none;
+      margin-left: -6%;
+      margin-right: -6%;
     }
 
     @media (max-width: 768px) {
       .steps-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 28px 20px;
-      }
-      .steps-grid .step:nth-child(n+5) {
-        display: none;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
       }
     }
 
@@ -851,7 +924,9 @@
     .step::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 6px;
       background: rgba(160, 120, 0, 0.12);
     }
@@ -863,13 +938,22 @@
         6px 14px 28px rgba(28, 10, 8, 0.14);
     }
 
-    /* Controlled chaos */
-    .steps-grid .step:nth-child(1) { transform: rotate(-2.5deg) translateY(0px); }
-    .steps-grid .step:nth-child(2) { transform: rotate(1.5deg)  translateY(18px); }
-    .steps-grid .step:nth-child(3) { transform: rotate(-1deg)   translateY(-8px); }
-    .steps-grid .step:nth-child(4) { transform: rotate(2.8deg)  translateY(12px); }
-    .steps-grid .step:nth-child(5) { transform: rotate(-3deg)   translateY(6px); }
-    .steps-grid .step:nth-child(6) { transform: rotate(1.2deg)  translateY(-12px); }
+    /* Pinboard scatter */
+    .steps-grid .step:nth-child(1) {
+      transform: rotate(-5deg) translateY(24px);
+    }
+
+    .steps-grid .step:nth-child(2) {
+      transform: rotate(3.5deg) translateY(-16px);
+    }
+
+    .steps-grid .step:nth-child(3) {
+      transform: rotate(-2.5deg) translateY(32px);
+    }
+
+    .steps-grid .step:nth-child(4) {
+      transform: rotate(6deg) translateY(-8px);
+    }
 
     .step-hook {
       font-family: 'Cormorant Garamond', serif;
@@ -882,6 +966,17 @@
     .step-hook em {
       color: var(--gold);
       font-style: italic;
+    }
+
+    @media (min-width: 769px) {
+      .step {
+        padding: 52px 24px 60px 32px;
+        min-height: 220px;
+      }
+
+      .step-hook {
+        line-height: 1.7;
+      }
     }
 
     /* ── FEATURES SHOWCASE ── */
@@ -1308,50 +1403,81 @@
       background: var(--white);
     }
 
-    #testimonials .section-tag {
+    .testimonials-header {
+      margin-bottom: 56px;
+    }
+
+    .testimonials-header .section-tag {
       color: var(--dusty-teal);
+    }
+
+    .testimonials-header .section-title {
+      margin-top: 12px;
     }
 
     .testimonials-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0;
-      margin-top: 56px;
+      grid-template-columns: 1fr 1.12fr 1fr;
+      gap: 24px;
+      align-items: center;
     }
 
     .testimonial-card {
-      padding: 0 52px;
-      border-right: 1px solid var(--cream-dark);
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 36px 32px 32px;
       position: relative;
+      border: 1px solid var(--cream-dark);
     }
 
-    .testimonial-card:first-child {
-      padding-left: 0;
+    .testimonial-card.featured {
+      background: var(--garnet-deep);
+      border-color: transparent;
+      padding: 48px 36px 40px;
     }
 
-    .testimonial-card:last-child {
-      padding-right: 0;
-      border-right: none;
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
     }
 
-    .testimonial-card::before {
-      content: '\201C';
+    .testimonial-hook {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      line-height: 1;
-      color: var(--cream-dark);
-      display: block;
-      margin-bottom: -16px;
-      font-weight: 300;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .testimonial-card.featured .testimonial-hook {
+      font-size: 1.55rem;
+      color: var(--cream);
     }
 
     .testimonial-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+      font-size: 0.88rem;
       line-height: 1.75;
-      color: var(--text-dark);
-      font-style: italic;
+      color: var(--text-mid);
       margin-bottom: 28px;
+    }
+
+    .testimonial-card.featured .testimonial-text {
+      color: rgba(251, 240, 214, 0.7);
+    }
+
+    .testimonial-byline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(196, 146, 28, 0.2);
+    }
+
+    .testimonial-card.featured .testimonial-byline {
+      border-top-color: rgba(251, 240, 214, 0.15);
     }
 
     .testimonial-couple {
@@ -1362,29 +1488,44 @@
       font-weight: 500;
     }
 
+    .testimonial-card.featured .testimonial-couple {
+      color: var(--gold-light);
+    }
+
     .testimonial-location {
       font-size: 0.72rem;
       color: var(--text-light);
-      margin-top: 5px;
       letter-spacing: 0.06em;
+    }
+
+    .testimonial-card.featured .testimonial-location {
+      color: rgba(251, 240, 214, 0.5);
+    }
+
+    .testimonial-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      flex-shrink: 0;
+    }
+
+    .testimonial-card.featured .testimonial-dot {
+      background: rgba(251, 240, 214, 0.3);
     }
 
     @media (max-width: 768px) {
       .testimonials-grid {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 20px;
       }
 
-      .testimonial-card {
-        padding: 0;
-        border-right: none;
-        border-bottom: 1px solid var(--cream-dark);
-        padding-bottom: 48px;
+      .testimonial-card.featured {
+        padding: 36px 32px 32px;
       }
 
-      .testimonial-card:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
+      .testimonial-card.featured .testimonial-hook {
+        font-size: 1.35rem;
       }
     }
 
@@ -1721,9 +1862,7 @@
       <!-- <p class="section-body">Getting your wedding website live is effortless. Here's all it takes.</p> -->
     </div>
     <div class="steps-grid">
-      <div class="step reveal">
-        <div class="step-hook">Half your guests<br>are at the wrong venue.<br><em>Your wedding is tomorrow.</em></div>
-      </div>
+
       <div class="step reveal">
         <div class="step-hook">You’ve sent the address<br><em>20 times.</em><br>Someone still called.</div>
       </div>
@@ -1731,14 +1870,18 @@
         <div class="step-hook">Sangeet Friday.<br>Wedding Sunday.<br><em>Someone shows up Saturday.</em></div>
       </div>
       <div class="step reveal">
-        <div class="step-hook"><em>"What time?"<br>"Where is it?"<br>"Which function?"</em><br>Every day. Every aunty.</div>
+        <div class="step-hook"><em>"What time?"<br>"Where is it?"<br>"Which function?"</em><br>Every day. Every aunty.
+        </div>
       </div>
       <div class="step reveal">
         <div class="step-hook">You're the <em>bride.</em><br>Not the<br>WhatsApp coordinator.</div>
       </div>
+      <!-- <div class="step reveal">
+        <div class="step-hook">Half your guests<br>are at the wrong venue.<br><em>Your wedding is tomorrow.</em></div>
+      </div>
       <div class="step reveal">
         <div class="step-hook">You should be<br><em>enjoying this.</em><br>Not managing groups.</div>
-      </div>
+      </div> -->
     </div>
   </section>
   <section id="how2">
@@ -1757,17 +1900,21 @@
                   <div class="sig-bars">
                     <span></span><span></span><span></span><span></span>
                   </div>
-                  <div class="wifi-icon"><div class="wifi-dot"></div></div>
+                  <div class="wifi-icon">
+                    <div class="wifi-dot"></div>
+                  </div>
                   <div class="battery-icon">
-                    <div class="battery-body"><div class="battery-fill"></div></div>
+                    <div class="battery-body">
+                      <div class="battery-fill"></div>
+                    </div>
                     <div class="battery-tip"></div>
                   </div>
                 </div>
               </div>
               <div class="phone-url-bar">
                 <svg class="phone-url-lock" viewBox="0 0 10 12" fill="#8e8e93" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="5" width="6" height="6" rx="1"/>
-                  <path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="#8e8e93" stroke-width="1.2" fill="none"/>
+                  <rect x="2" y="5" width="6" height="6" rx="1" />
+                  <path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="#8e8e93" stroke-width="1.2" fill="none" />
                 </svg>
                 <span class="phone-url-text">radhikawedstanmay.com</span>
                 <span class="phone-url-dots">···</span>
@@ -1777,19 +1924,21 @@
               <video autoplay loop playsinline>
                 <source src="Radhika weds Tanmay - 2 April 2026.mp4" type="video/mp4">
               </video>
+              <button class="video-mute-btn" id="muteBtn" aria-label="Toggle mute">🔇</button>
             </div>
           </div>
         </div>
       </div>
       <div class="how2-features">
-        <div class="how2-feature-title">Effortless Guest Experience</div>
-        <p class="how2-feature-body">No more “where is the venue?” or “what time is it?” — everything they need is right there.</p>
+        <div class="how2-feature-title">Everything your guests need, in one place</div>
+        <p class="how2-feature-body">No more “where is the venue?” or “what time is it?” — everything they need is right
+          there.</p>
         <ul class="how2-checklist">
           <li><span class="how2-check">✓</span> RSVP in seconds</li>
-          <li><span class="how2-check">✓</span> One-tap directions to your venue</li>
+          <li><span class="how2-check">✓</span> Directions to your venue</li>
           <li><span class="how2-check">✓</span> Event countdown</li>
           <li><span class="how2-check">✓</span> WhatsApp updates & reminders</li>
-          
+
         </ul>
       </div>
     </div>
@@ -1797,24 +1946,40 @@
 
   <!-- TESTIMONIALS -->
   <section id="testimonials">
-    <div class="reveal">
-      <span class="section-tag">Love from Couples</span>
+    <div class="testimonials-header reveal">
+      <span class="section-tag">Real Weddings. Real Experiences.</span>
+      <h2 class="section-title">Loved by <em>2,000+ couples</em></h2>
     </div>
     <div class="testimonials-grid">
       <div class="testimonial-card reveal">
-        <p class="testimonial-text">Our guests couldn't stop talking about the website. Every single one of them found the venue on their own. Worth every rupee.</p>
-        <div class="testimonial-couple">Riya &amp; Kabir</div>
-        <div class="testimonial-location">Mumbai</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-hook">Every guest found the venue on their own.</div>
+        <p class="testimonial-text">Not one call asking for directions. Our guests couldn't stop talking about it. Worth every rupee.</p>
+        <div class="testimonial-byline">
+          <div class="testimonial-couple">Riya &amp; Kabir</div>
+          <div class="testimonial-dot"></div>
+          <div class="testimonial-location">Mumbai · Nov 2025</div>
+        </div>
+      </div>
+      <div class="testimonial-card featured reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-hook">Not a single call on my wedding morning.</div>
+        <p class="testimonial-text">First time in my family's wedding history. Everyone had what they needed before they even thought to ask.</p>
+        <div class="testimonial-byline">
+          <div class="testimonial-couple">Pooja &amp; Arjun</div>
+          <div class="testimonial-dot"></div>
+          <div class="testimonial-location">Bengaluru · Jan 2026</div>
+        </div>
       </div>
       <div class="testimonial-card reveal">
-        <p class="testimonial-text">Not a single call on my wedding morning asking for the location. First time in my family's wedding history.</p>
-        <div class="testimonial-couple">Pooja &amp; Arjun</div>
-        <div class="testimonial-location">Bengaluru</div>
-      </div>
-      <div class="testimonial-card reveal">
-        <p class="testimonial-text">Sent the link to 200 people on WhatsApp. RSVPs just came in. No follow-ups, no spreadsheets. I actually enjoyed the week before my wedding.</p>
-        <div class="testimonial-couple">Sneha &amp; Dev</div>
-        <div class="testimonial-location">Delhi</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-hook">RSVPs just came in. Zero follow-ups.</div>
+        <p class="testimonial-text">Sent the link once on WhatsApp. No spreadsheets, no chasing. I actually enjoyed the week before my wedding.</p>
+        <div class="testimonial-byline">
+          <div class="testimonial-couple">Sneha &amp; Dev</div>
+          <div class="testimonial-dot"></div>
+          <div class="testimonial-location">Delhi · Dec 2025</div>
+        </div>
       </div>
     </div>
   </section>
@@ -2127,7 +2292,20 @@
   <script>
     // Nav scroll state
     const nav = document.querySelector('nav');
-    const onScroll = () => nav.classList.toggle('nav--scrolled', window.scrollY > 48);
+    let lastY = window.scrollY;
+    let hiddenAt = null;
+    const onScroll = () => {
+      const y = window.scrollY;
+      nav.classList.toggle('nav--scrolled', y > 48);
+      if (y > lastY && y > 220) {
+        nav.style.transform = 'translateY(-100%)';
+        hiddenAt = y;
+      } else if (y < lastY && hiddenAt !== null && (hiddenAt - y) > 220) {
+        nav.style.transform = '';
+        hiddenAt = null;
+      }
+      lastY = y;
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
@@ -2143,20 +2321,25 @@
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
 
-    // Video audio on scroll into view
+    // Video controls
     const demoVideo = document.querySelector('.phone-video-wrap video');
-    if (demoVideo) {
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            demoVideo.muted = false;
-            demoVideo.play();
-          } else {
-            demoVideo.muted = true;
-          }
-        });
-      }, { threshold: 0.6 });
-      videoObserver.observe(demoVideo);
+    const muteBtn = document.getElementById('muteBtn');
+    if (demoVideo && muteBtn) {
+      demoVideo.muted = true;
+      muteBtn.textContent = '🔇';
+
+      muteBtn.addEventListener('click', () => {
+        demoVideo.muted = !demoVideo.muted;
+        muteBtn.textContent = demoVideo.muted ? '🔇' : '🔊';
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          demoVideo.pause();
+        } else {
+          demoVideo.play();
+        }
+      });
     }
 
     // FAQ toggle
