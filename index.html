@@ -1746,6 +1746,103 @@
       text-decoration: none;
     }
 
+    /* ── PROBLEM CHAT ── */
+    #how {
+      text-align: center;
+    }
+    #how .section-title {
+      margin: 0 auto 0;
+    }
+    #how .gold-rule {
+      margin: 0 auto 32px;
+    }
+    .problem-chat {
+      max-width: 340px;
+      margin: 44px auto 0;
+      background: rgba(221, 216, 208, 0.5);
+      border-radius: 16px;
+      padding: 20px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .chat-msg {
+      background: #fff;
+      border-radius: 10px 10px 10px 0;
+      padding: 10px 14px 6px;
+      font-size: 0.92rem;
+      color: #111;
+      max-width: 85%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      align-self: flex-start;
+      font-family: -apple-system, 'Jost', sans-serif;
+      line-height: 1.35;
+    }
+    .chat-time {
+      font-size: 0.62rem;
+      color: #8e8e93;
+      margin-top: 4px;
+      text-align: right;
+    }
+    .problem-closing {
+      margin-top: 36px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      color: var(--text-mid);
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── PROBLEM CHAT – DESKTOP ── */
+    @media (min-width: 769px) {
+      #how {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto 1fr;
+        align-items: start;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 48px;
+        padding-right: 48px;
+        column-gap: 80px;
+        text-align: left;
+      }
+      #how > .reveal:first-child {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: end;
+      }
+      #how .problem-chat {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        margin: 0;
+        width: 400px;
+        align-self: center;
+        background: rgba(221, 216, 208, 0.45);
+        backdrop-filter: blur(6px);
+      }
+      #how .problem-closing {
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 28px;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        max-width: none;
+        align-self: start;
+      }
+      #how .gold-rule {
+        margin-left: 0;
+      }
+      #how .section-title {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from {
@@ -1797,6 +1894,29 @@
 
       .hero-stats {
         gap: 32px;
+      }
+
+      .hero-badge {
+        font-size: 0.62rem;
+        padding: 5px 13px;
+        margin-bottom: 18px;
+      }
+
+      .hero-title {
+        font-size: 2.4rem;
+      }
+
+      .hero-desc {
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+      }
+
+      .hero-btns .btn-outline {
+        font-size: 0.7rem;
+        padding: 8px 16px;
+        opacity: 0.45;
+        border-color: rgba(92, 20, 40, 0.3);
+        letter-spacing: 0.08em;
       }
     }
   </style>
@@ -1853,40 +1973,39 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+  <!-- PROBLEM -->
   <section id="how">
     <div class="reveal">
-      <!-- <span class="section-tag">The Process</span> -->
       <div class="gold-rule"></div>
-      <h2 class="section-title">Planning a wedding is beautiful.<br><em>The logistics are not.</em></h2>
-      <!-- <p class="section-body">Getting your wedding website live is effortless. Here's all it takes.</p> -->
+      <h2 class="section-title">Your guests have questions.<br><em>Lots of them.</em></h2>
     </div>
-    <div class="steps-grid">
-
-      <div class="step reveal">
-        <div class="step-hook">You’ve sent the address<br><em>20 times.</em><br>Someone still called.</div>
+    <div class="problem-chat reveal">
+      <div class="chat-msg">
+        📍 Location bhej do?
+        <div class="chat-time">10:14 AM ✓✓</div>
       </div>
-      <div class="step reveal">
-        <div class="step-hook">Sangeet Friday.<br>Wedding Sunday.<br><em>Someone shows up Saturday.</em></div>
+      <div class="chat-msg">
+        🕐 Timing kya hai kal?
+        <div class="chat-time">10:27 AM ✓✓</div>
       </div>
-      <div class="step reveal">
-        <div class="step-hook"><em>"What time?"<br>"Where is it?"<br>"Which function?"</em><br>Every day. Every aunty.
-        </div>
+      <div class="chat-msg">
+        🔁 Send me location again?
+        <div class="chat-time">11:03 AM ✓✓</div>
       </div>
-      <div class="step reveal">
-        <div class="step-hook">You're the <em>bride.</em><br>Not the<br>WhatsApp coordinator.</div>
+      <div class="chat-msg">
+        💌 How do I RSVP?
+        <div class="chat-time">11:42 AM ✓✓</div>
       </div>
-      <!-- <div class="step reveal">
-        <div class="step-hook">Half your guests<br>are at the wrong venue.<br><em>Your wedding is tomorrow.</em></div>
+      <div class="chat-msg" style="opacity:0.5;">
+        📍 Where is the venue?
+        <div class="chat-time">12:18 PM ✓✓</div>
       </div>
-      <div class="step reveal">
-        <div class="step-hook">You should be<br><em>enjoying this.</em><br>Not managing groups.</div>
-      </div> -->
     </div>
+    <p class="problem-closing reveal">That’s exactly what your wedding website solves.</p>
   </section>
   <section id="how2">
     <div class="how2-header reveal">
-      <span class="section-tag">The Solution</span>
+      <!-- <span class="section-tag">The Solution</span> -->
       <h2 class="section-title">One link.<br>No more chaos.</h2>
     </div>
     <div class="how2-card reveal">
@@ -1983,68 +2102,8 @@
       </div>
     </div>
   </section>
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="features-intro reveal">
-      <span class="section-tag">What's Included</span>
-      <div class="gold-rule"></div>
-      <h2 class="section-title">Everything your guests need,<br><em>before they even think to ask.</em></h2>
-      <p class="section-body">Every feature is designed around one idea — fewer calls, less chaos, more joy.</p>
-    </div>
-    <div class="features-grid reveal">
-      <div class="feature-card">
-        <span class="feature-icon">🗺️</span>
-        <div class="feature-title">Venue on Google Maps</div>
-        <p class="feature-desc">Tap once, get directions. <strong>Even your most technologically challenged uncle can
-            find it.</strong></p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">💌</span>
-        <div class="feature-title">RSVP in One Tap</div>
-        <p class="feature-desc">Know exactly who's coming weeks before the wedding. <strong>No spreadsheets. No
-            follow-up calls.</strong></p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">📅</span>
-        <div class="feature-title">Add to Calendar</div>
-        <p class="feature-desc">Mehndi, Sangeet, and Wedding saved to their phone automatically. <strong>They won't
-            forget.</strong></p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">📸</span>
-        <div class="feature-title">Photo Gallery</div>
-        <p class="feature-desc">Share your pre-wedding shoot with everyone who loves you, <strong>not just your
-            Instagram followers.</strong></p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🎵</span>
-        <div class="feature-title">Background Music</div>
-        <p class="feature-desc">The moment they open your site, your song is playing. <strong>It's a feeling, not just a
-            feature.</strong></p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🌐</span>
-        <div class="feature-title">Custom Domain</div>
-        <p class="feature-desc"><em>preetiwedsashutosh.com</em> — <strong>because your wedding deserves its own address
-            on the internet.</strong></p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">⏳</span>
-        <div class="feature-title">Live Countdown</div>
-        <p class="feature-desc">Builds excitement for your guests. <strong>Every time they check, the day feels
-            closer.</strong></p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">💬</span>
-        <div class="feature-title">WhatsApp Ready</div>
-        <p class="feature-desc">One link. <strong>Designed to look beautiful the moment it's forwarded on any family
-            group.</strong></p>
-      </div>
-    </div>
-  </section>
 
-  <!-- PRICING -->
-  <section id="pricing">
+    <section id="pricing">
     <div class="reveal">
       <span class="section-tag">Plans & Pricing</span>
       <div class="gold-rule"></div>
@@ -2123,6 +2182,68 @@
 
     </div>
   </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="features-intro reveal">
+      <span class="section-tag">What's Included</span>
+      <div class="gold-rule"></div>
+      <h2 class="section-title">Everything your guests need,<br><em>before they even think to ask.</em></h2>
+      <p class="section-body">Every feature is designed around one idea — fewer calls, less chaos, more joy.</p>
+    </div>
+    <div class="features-grid reveal">
+      <div class="feature-card">
+        <span class="feature-icon">🗺️</span>
+        <div class="feature-title">Venue on Google Maps</div>
+        <p class="feature-desc">Tap once, get directions. <strong>Even your most technologically challenged uncle can
+            find it.</strong></p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💌</span>
+        <div class="feature-title">RSVP in One Tap</div>
+        <p class="feature-desc">Know exactly who's coming weeks before the wedding. <strong>No spreadsheets. No
+            follow-up calls.</strong></p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📅</span>
+        <div class="feature-title">Add to Calendar</div>
+        <p class="feature-desc">Mehndi, Sangeet, and Wedding saved to their phone automatically. <strong>They won't
+            forget.</strong></p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📸</span>
+        <div class="feature-title">Photo Gallery</div>
+        <p class="feature-desc">Share your pre-wedding shoot with everyone who loves you, <strong>not just your
+            Instagram followers.</strong></p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎵</span>
+        <div class="feature-title">Background Music</div>
+        <p class="feature-desc">The moment they open your site, your song is playing. <strong>It's a feeling, not just a
+            feature.</strong></p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🌐</span>
+        <div class="feature-title">Custom Domain</div>
+        <p class="feature-desc"><em>preetiwedsashutosh.com</em> — <strong>because your wedding deserves its own address
+            on the internet.</strong></p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⏳</span>
+        <div class="feature-title">Live Countdown</div>
+        <p class="feature-desc">Builds excitement for your guests. <strong>Every time they check, the day feels
+            closer.</strong></p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💬</span>
+        <div class="feature-title">WhatsApp Ready</div>
+        <p class="feature-desc">One link. <strong>Designed to look beautiful the moment it's forwarded on any family
+            group.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
 
   <!-- PREVIEW -->
   <section id="preview">
