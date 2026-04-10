@@ -1,0 +1,99 @@
+---
+---
+
+<section id="cta-banner">
+  <div class="cta-inner">
+
+    <!-- Left: copy -->
+    <div class="cta-copy">
+      <span class="section-tag">Get Started Today</span>
+      <h2 class="section-title">Your guests are already<br>asking. <em>Be ready.</em></h2>
+      <p class="section-body">Drop your details and we'll WhatsApp you a sample site within 2 hours. No payment needed to get started.</p>
+      <ul class="cta-trust">
+        <li>2,000+ couples already with us</li>
+        <li>Live in as little as 24 hours</li>
+        <li>No spam. No cold calls. Ever.</li>
+      </ul>
+    </div>
+
+    <!-- Right: form card -->
+    <div class="cta-form-card">
+      <div class="cta-form-title">Tell us about your wedding</div>
+      <form class="cta-form" id="ctaForm" novalidate>
+        <div class="cta-field">
+          <label for="cta-names">Your Names</label>
+          <input type="text" id="cta-names" name="names" placeholder="e.g. Priya & Rahul" required />
+        </div>
+        <div class="cta-field">
+          <label for="cta-phone">WhatsApp Number</label>
+          <input type="tel" id="cta-phone" name="phone" placeholder="+91 98765 43210" required />
+        </div>
+        <div class="cta-field">
+          <label for="cta-email">Email Address</label>
+          <input type="email" id="cta-email" name="email" placeholder="you@email.com" required />
+        </div>
+        <div class="cta-field">
+          <label for="cta-date">Wedding Date (approx.)</label>
+          <input type="date" id="cta-date" name="date" />
+        </div>
+        <div class="cta-field">
+          <label>Which plan interests you?</label>
+          <div class="cta-plan-radios">
+            <label class="cta-plan-option">
+              <input type="radio" name="plan" value="Starter" />
+              <span>Starter<small>₹1,999</small></span>
+            </label>
+            <label class="cta-plan-option">
+              <input type="radio" name="plan" value="Pro" checked />
+              <span>Pro<small>₹5,999</small></span>
+            </label>
+            <label class="cta-plan-option">
+              <input type="radio" name="plan" value="Premium" />
+              <span>Premium<small>₹29,999</small></span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="cta-submit">Get My Wedding Website →</button>
+        <p class="cta-form-note">We'll WhatsApp you a sample site within 2 hours.</p>
+      </form>
+      <div class="cta-success" id="ctaSuccess">
+        <div class="cta-success-icon">✦</div>
+        <div class="cta-success-title">We'll be in touch shortly!</div>
+        <p>Check your WhatsApp — we'll send you a sample site link within 2 hours. Your wedding website is almost ready.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const ctaForm = document.getElementById('ctaForm') as HTMLFormElement | null;
+  const ctaSuccess = document.getElementById('ctaSuccess');
+
+  if (ctaForm && ctaSuccess) {
+    ctaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(ctaForm);
+      const names = (data.get('names') as string).trim();
+      const phone = (data.get('phone') as string).trim();
+      const email = (data.get('email') as string).trim();
+      const date  = data.get('date') as string;
+      const plan  = data.get('plan') as string;
+
+      if (!names || !phone || !email) return;
+
+      const dateStr = date
+        ? new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+        : 'TBD';
+
+      const msg = `Hi! I'd like a wedding website.\n\nNames: ${names}\nPlan: ${plan}\nWedding date: ${dateStr}\nEmail: ${email}\nPhone: ${phone}`;
+
+      ctaForm.style.display = 'none';
+      ctaSuccess.classList.add('visible');
+
+      setTimeout(() => {
+        window.open('https://wa.me/919999999999?text=' + encodeURIComponent(msg), '_blank');
+      }, 600);
+    });
+  }
+</script>

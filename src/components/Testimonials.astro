@@ -1,0 +1,100 @@
+---
+---
+
+<section id="testimonials">
+  <div class="testimonials-header reveal">
+    <span class="section-tag">Real Weddings. Real Experiences.</span>
+    <h2 class="section-title">Loved by <em>2,000+ couples</em></h2>
+  </div>
+
+  <div class="swiper testimonials-swiper">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-hook">Every guest found the venue on their own.</div>
+          <p class="testimonial-text">Not one call asking for directions. Our guests couldn't stop talking about it. Worth every rupee.</p>
+          <div class="testimonial-byline">
+            <div class="testimonial-couple">Riya &amp; Kabir</div>
+            <div class="testimonial-dot"></div>
+            <div class="testimonial-location">Mumbai · Nov 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="testimonial-card featured">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-hook">Not a single call on my wedding morning.</div>
+          <p class="testimonial-text">First time in my family's wedding history. Everyone had what they needed before they even thought to ask.</p>
+          <div class="testimonial-byline">
+            <div class="testimonial-couple">Pooja &amp; Arjun</div>
+            <div class="testimonial-dot"></div>
+            <div class="testimonial-location">Bengaluru · Jan 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-hook">RSVPs just came in. Zero follow-ups.</div>
+          <p class="testimonial-text">Sent the link once on WhatsApp. No spreadsheets, no chasing. I actually enjoyed the week before my wedding.</p>
+          <div class="testimonial-byline">
+            <div class="testimonial-couple">Sneha &amp; Dev</div>
+            <div class="testimonial-dot"></div>
+            <div class="testimonial-location">Delhi · Dec 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<style>
+  .testimonials-swiper {
+    width: 100%;
+    padding-bottom: 48px !important;
+  }
+
+  .testimonials-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+
+  .testimonials-swiper .testimonial-card {
+    width: 100%;
+  }
+
+  .testimonials-swiper .swiper-pagination-bullet {
+    background: var(--cream-dark);
+    opacity: 1;
+  }
+
+  .testimonials-swiper .swiper-pagination-bullet-active {
+    background: var(--gold);
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+
+  new Swiper('.testimonials-swiper', {
+    modules: [Pagination, Autoplay],
+    loop: true,
+    autoplay: { delay: 4500, disableOnInteraction: true },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    spaceBetween: 24,
+    slidesPerView: 1,
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1100: { slidesPerView: 3 },
+    },
+  });
+</script>

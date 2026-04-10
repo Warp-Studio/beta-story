@@ -1,0 +1,84 @@
+---
+---
+
+<!-- SOLUTION: Phone mockup with video -->
+<section id="how2">
+  <div class="how2-header reveal">
+    <!-- <span class="section-tag">The Solution</span> -->
+    <h2 class="section-title">One link.<br>No more chaos.</h2>
+  </div>
+  <div class="how2-card reveal">
+    <div class="how2-phone-wrap">
+      <div class="how2-video-frame">
+        <div class="phone-screen">
+          <div class="phone-chrome">
+            <div class="phone-status-row">
+              <span>9:41</span>
+              <div class="phone-status-right">
+                <div class="sig-bars">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="wifi-icon">
+                  <div class="wifi-dot"></div>
+                </div>
+                <div class="battery-icon">
+                  <div class="battery-body">
+                    <div class="battery-fill"></div>
+                  </div>
+                  <div class="battery-tip"></div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-url-bar">
+              <svg class="phone-url-lock" viewBox="0 0 10 12" fill="#8e8e93" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="5" width="6" height="6" rx="1" />
+                <path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="#8e8e93" stroke-width="1.2" fill="none" />
+              </svg>
+              <span class="phone-url-text">radhikawedstanmay.com</span>
+              <span class="phone-url-dots">···</span>
+            </div>
+          </div>
+          <div class="phone-video-wrap">
+            <video autoplay loop playsinline>
+              <source src="/radhika-weds-tanmay.mp4" type="video/mp4" />
+            </video>
+            <button class="video-mute-btn" id="muteBtn" aria-label="Toggle mute">🔇</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how2-features">
+      <div class="how2-feature-title">Everything your guests need, in one place</div>
+      <p class="how2-feature-body">No more "where is the venue?" or "what time is it?" — everything they need is right there.</p>
+      <ul class="how2-checklist">
+        <li><span class="how2-check">✓</span> RSVP in seconds</li>
+        <li><span class="how2-check">✓</span> Directions to your venue</li>
+        <li><span class="how2-check">✓</span> Event countdown</li>
+        <li><span class="how2-check">✓</span> WhatsApp updates & reminders</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  const demoVideo = document.querySelector('.phone-video-wrap video') as HTMLVideoElement | null;
+  const muteBtn = document.getElementById('muteBtn');
+
+  if (demoVideo && muteBtn) {
+    demoVideo.muted = true;
+    muteBtn.textContent = '🔇';
+
+    muteBtn.addEventListener('click', () => {
+      demoVideo.muted = !demoVideo.muted;
+      muteBtn.textContent = demoVideo.muted ? '🔇' : '🔊';
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        demoVideo.pause();
+      } else {
+        demoVideo.play();
+      }
+    });
+  }
+</script>

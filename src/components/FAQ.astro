@@ -1,0 +1,54 @@
+---
+---
+
+<section id="faq">
+  <div class="reveal">
+    <span class="section-tag">Questions</span>
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Things People Ask <em>Us</em></h2>
+  </div>
+  <div class="faq-list">
+
+    <div class="faq-item reveal">
+      <div class="faq-q">How long does it take to get my website? <span>+</span></div>
+      <div class="faq-a">Starter plans are typically delivered in 48–72 hours. Pro plans in 24–48 hours. Premium plans are delivered in 24 hours with priority support. We'll confirm your timeline via WhatsApp after your order.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">Can I get a custom domain like preetiwedsashutosh.com? <span>+</span></div>
+      <div class="faq-a">Yes! Custom domains are included in the Pro and Premium plans. We handle the domain setup for you — all you need to do is choose a name you love. Domain registration charges (typically ₹800–₹1,200/year) are included in the plan price.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">What if I need changes after the site is live? <span>+</span></div>
+      <div class="faq-a">Starter includes 1 round of edits. Pro includes 2 rounds. Premium includes unlimited edits until your wedding day. Just message us on WhatsApp and we'll update it within a few hours.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">How long will my website stay live? <span>+</span></div>
+      <div class="faq-a">Your website stays live for 12 months from the date of your wedding. After that, you can renew hosting at a small annual fee if you'd like to keep it as a memento.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">Do you work with all wedding budgets and religions? <span>+</span></div>
+      <div class="faq-a">Absolutely. We've built sites for Hindu, Muslim, Sikh, Christian, and inter-faith weddings across India and abroad. We celebrate all love stories with equal joy and care.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">How do I pay? <span>+</span></div>
+      <div class="faq-a">We accept UPI (GPay, PhonePe, Paytm), bank transfer, and all major debit/credit cards. Payment is 100% upfront, and we'll send you a proper invoice.</div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement as HTMLElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
