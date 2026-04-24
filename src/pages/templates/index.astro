@@ -1,0 +1,249 @@
+---
+import { templates } from '../../templates/data';
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Wedding Website Templates">
+  <main class="gallery">
+    <header class="gallery__header">
+      <h1 class="gallery__title">Wedding Website Templates</h1>
+      <p class="gallery__sub">Enter your details to preview any template instantly.</p>
+    </header>
+
+    <div class="gallery__grid">
+      {templates.map((tpl) => (
+        <article class="card" data-template-id={tpl.id}>
+          <div class="card__preview-wrap">
+            <iframe
+              class="card__iframe"
+              src={`/preview/${tpl.id}`}
+              title={`${tpl.name} preview`}
+              scrolling="no"
+              tabindex="-1"
+              aria-hidden="true"
+            ></iframe>
+            <div class="card__iframe-mask"></div>
+          </div>
+
+          <div class="card__body">
+            <h2 class="card__name">{tpl.name}</h2>
+            <p class="card__desc">{tpl.description}</p>
+
+            <form class="card__form">
+              <label class="card__label">
+                Partner 1
+                <input class="card__input" name="partner1" type="text" placeholder={tpl.defaults.partner1} />
+              </label>
+              <label class="card__label">
+                Partner 2
+                <input class="card__input" name="partner2" type="text" placeholder={tpl.defaults.partner2} />
+              </label>
+              <label class="card__label">
+                Date
+                <input class="card__input" name="date" type="date" />
+              </label>
+              <label class="card__label">
+                Time
+                <input class="card__input" name="time" type="text" placeholder={tpl.defaults.time} />
+              </label>
+              <label class="card__label">
+                Venue
+                <input class="card__input" name="venue" type="text" placeholder={tpl.defaults.venue} />
+              </label>
+
+              <a
+                class="card__cta"
+                href={`/preview/${tpl.id}`}
+                target="_blank"
+                rel="noopener"
+              >
+                Open Full Preview ↗
+              </a>
+            </form>
+          </div>
+        </article>
+      ))}
+    </div>
+  </main>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.card').forEach((card) => {
+    const templateId = card.dataset.templateId!;
+    const iframe = card.querySelector<HTMLIFrameElement>('.card__iframe')!;
+    const ctaLink = card.querySelector<HTMLAnchorElement>('.card__cta')!;
+    const form = card.querySelector<HTMLFormElement>('.card__form')!;
+
+    function buildUrl(full = false) {
+      const params = new URLSearchParams();
+      new FormData(form).forEach((val, key) => {
+        if (val) params.set(key, val as string);
+      });
+      const qs = params.toString();
+      return `/preview/${templateId}${qs ? '?' + qs : ''}`;
+    }
+
+    function refresh() {
+      const url = buildUrl();
+      iframe.src = url;
+      ctaLink.href = buildUrl(true);
+    }
+
+    form.addEventListener('input', refresh);
+  });
+</script>
+
+<style>
+  .gallery {
+    min-height: 100dvh;
+    background: #f5f7fb;
+    padding: 4rem 1.5rem;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .gallery__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .gallery__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
+    color: #1e3560;
+    margin: 0 0 0.5rem;
+  }
+
+  .gallery__sub {
+    font-size: 0.95rem;
+    color: #5a708a;
+    margin: 0;
+  }
+
+  /* ── Grid ── */
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(45,74,122,0.1);
+  }
+
+  /* ── Iframe preview (scaled down) ── */
+  .card__preview-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: #e8eef7;
+    overflow: hidden;
+  }
+
+  .card__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 375px;
+    height: 812px;
+    border: none;
+    transform-origin: top left;
+    transform: scale(0.587); /* ~220/375, overridden by JS */
+    pointer-events: none;
+  }
+
+  .card__iframe-mask {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /* ── Card body ── */
+  .card__body {
+    padding: 1.5rem;
+  }
+
+  .card__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #1e3560;
+    margin: 0 0 0.25rem;
+  }
+
+  .card__desc {
+    font-size: 0.82rem;
+    color: #6a7e99;
+    margin: 0 0 1.25rem;
+    line-height: 1.5;
+  }
+
+  /* ── Form ── */
+  .card__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .card__label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8898aa;
+  }
+
+  .card__input {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #d8e3f0;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-family: 'Jost', sans-serif;
+    color: #1e3560;
+    background: #f8fafd;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .card__input:focus { border-color: #2d4a7a; }
+  .card__input::placeholder { color: #aab8cc; }
+
+  /* venue spans full width */
+  .card__label:nth-last-child(2) { grid-column: 1 / -1; }
+
+  .card__cta {
+    grid-column: 1 / -1;
+    display: block;
+    margin-top: 0.4rem;
+    padding: 0.65rem 1rem;
+    background: #2d4a7a;
+    color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .card__cta:hover { background: #1e3560; }
+</style>
+
+<script>
+  // Scale iframes to fit the preview container width
+  document.querySelectorAll<HTMLElement>('.card__preview-wrap').forEach((wrap) => {
+    const iframe = wrap.querySelector<HTMLIFrameElement>('.card__iframe')!;
+    function scaleIframe() {
+      const scale = wrap.offsetWidth / 375;
+      iframe.style.transform = `scale(${scale})`;
+    }
+    scaleIframe();
+    window.addEventListener('resize', scaleIframe);
+  });
+</script>

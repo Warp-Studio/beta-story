@@ -1,0 +1,117 @@
+---
+import { templates }   from '../../templates/data';
+import TemplateBase    from '../../layouts/TemplateBase.astro';
+import CurtainReveal   from '../../templates/components/CurtainReveal.astro';
+import FloralBlue      from '../../templates/designs/FloralBlue.astro';
+import RoyalArch      from '../../templates/designs/RoyalArch.astro';
+import Countdown       from '../../templates/components/Countdown.astro';
+import EventDetails    from '../../templates/components/EventDetails.astro';
+import RSVPForm        from '../../templates/components/RSVPForm.astro';
+import ThankYou        from '../../templates/components/ThankYou.astro';
+
+export function getStaticPaths() {
+  return templates.map((t) => ({ params: { template: t.id } }));
+}
+
+const { template } = Astro.params;
+const tpl = templates.find((t) => t.id === template)!;
+
+const cssVars = [
+  `--accent: ${tpl.accentColor}`,
+  `--gold: ${tpl.goldColor}`,
+  `--bg: ${tpl.bgColor}`,
+].join('; ');
+---
+
+<TemplateBase title={`${tpl.defaults.partner1} & ${tpl.defaults.partner2} — ${tpl.name}`}>
+  <div class="wedding-site" style={cssVars}>
+
+    <!-- ① Full-viewport invite + curtain reveal -->
+    <CurtainReveal
+      accentColor={tpl.accentColor}
+      goldColor={tpl.goldColor}
+      bgColor={tpl.bgColor}
+      musicSrc={tpl.musicSrc}
+      curtainMode={tpl.curtainMode ?? 'full'}
+    >
+      {template === 'floral-blue' && (
+        <FloralBlue
+          partner1={tpl.defaults.partner1}
+          partner2={tpl.defaults.partner2}
+          date={tpl.defaults.date}
+          time={tpl.defaults.time}
+          venue={tpl.defaults.venue}
+          address={tpl.defaults.address}
+          rsvp={tpl.defaults.rsvp}
+          ceremony={tpl.ceremony}
+        />
+      )}
+      {template === 'royal-arch' && (
+        <RoyalArch
+          partner1={tpl.defaults.partner1}
+          partner2={tpl.defaults.partner2}
+          date={tpl.defaults.date}
+          time={tpl.defaults.time}
+          venue={tpl.defaults.venue}
+          address={tpl.defaults.address}
+          rsvp={tpl.defaults.rsvp}
+          ceremony={tpl.ceremony}
+        />
+      )}
+    </CurtainReveal>
+
+    <!-- ② Countdown -->
+    <Countdown targetDate={tpl.defaults.date} />
+
+    <!-- ③ Event & venue details -->
+    <EventDetails events={tpl.defaults.events} />
+
+    <!-- ④ RSVP -->
+    <RSVPForm templateId={tpl.id} apiBase="http://localhost:3000" />
+
+    <!-- ⑤ Thank You -->
+    <ThankYou parents={tpl.defaults.parents} />
+
+  </div>
+</TemplateBase>
+
+<!--
+  Client-side param injection — URL params override the server-rendered defaults.
+  Supported: partner1, partner2, date, time, venue, address, rsvp, ceremony
+-->
+<script>
+  const p = new URLSearchParams(window.location.search);
+
+  function setText(field: string, value: string) {
+    document.querySelectorAll<HTMLElement>(`[data-field="${field}"]`).forEach((el) => {
+      el.textContent = value;
+    });
+  }
+
+  if (p.get('partner1')) setText('partner1', p.get('partner1')!);
+  if (p.get('partner2')) setText('partner2', p.get('partner2')!);
+  if (p.get('time'))     setText('time',     p.get('time')!);
+  if (p.get('venue'))    setText('venue',    p.get('venue')!);
+  if (p.get('address'))  setText('address',  p.get('address')!);
+  if (p.get('rsvp'))     setText('rsvp',     `RSVP AT ${p.get('rsvp')}`);
+
+  const rawDate = p.get('date');
+  if (rawDate) {
+    const d = new Date(rawDate);
+    if (!isNaN(d.getTime())) {
+      setText('month',  d.toLocaleDateString('en-US', { month:   'long'   }));
+      setText('dayNum', String(d.getDate()));
+      setText('year',   String(d.getFullYear()));
+      setText('day',    d.toLocaleDateString('en-US', { weekday: 'long'   }));
+    } else {
+      setText('month', rawDate);
+    }
+  }
+</script>
+
+<style>
+  .wedding-site {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

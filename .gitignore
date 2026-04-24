@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+server/node_modules/
+
+# Build output
+dist/
+
+# Astro
+.astro/
+
+# Environment variables — never commit these
+.env
+server/.env
+
+# OS
+.DS_Store

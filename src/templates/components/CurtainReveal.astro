@@ -1,0 +1,457 @@
+---
+interface Props {
+  accentColor?: string;
+  goldColor?: string;
+  bgColor?: string;
+  musicSrc?: string;
+  curtainMode?: 'half' | 'full';
+}
+const {
+  accentColor  = '#2d4a7a',
+  goldColor    = '#c8a97e',
+  bgColor      = '#e8eef7',
+  musicSrc,
+  curtainMode  = 'full',
+} = Astro.props;
+---
+
+<div class="curtain-wrap">
+  <div class="curtain-content">
+    <slot />
+  </div>
+
+  <!-- Fixed curtain overlay -->
+  <div class="curtain" id="curtain" role="button" tabindex="0" aria-label="Tap to open invitation" data-mode={curtainMode}>
+
+    <!-- Gold rod across the top -->
+    <div class="curtain__rod" aria-hidden="true">
+      <span class="curtain__rod-finial curtain__rod-finial--left"></span>
+      <span class="curtain__rod-finial curtain__rod-finial--right"></span>
+    </div>
+
+    <!-- Left panel -->
+    <div class="curtain__panel curtain__panel--left">
+      <div class="curtain__rings" aria-hidden="true">
+        {Array.from({length: 9}).map(() => <span class="curtain__ring"></span>)}
+      </div>
+      <div class="curtain__fabric"></div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="curtain__panel curtain__panel--right">
+      <div class="curtain__rings" aria-hidden="true">
+        {Array.from({length: 9}).map(() => <span class="curtain__ring"></span>)}
+      </div>
+      <div class="curtain__fabric"></div>
+    </div>
+
+    <!-- Center CTA -->
+    <div class="curtain__cta" id="curtain-cta" aria-hidden="true">
+      <span class="curtain__cta-label">Tap to Open</span>
+      <svg class="curtain__cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M12 3v18M3 12l9 9 9-9"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Music: rendered only if src provided -->
+  {musicSrc && (
+    <audio id="bg-music" src={musicSrc} loop preload="none"></audio>
+  )}
+
+  <!-- Scroll hint: appears after curtain opens, fades on first scroll -->
+  <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
+    <span class="scroll-hint__label">Scroll</span>
+    <svg class="scroll-hint__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/>
+      <polyline points="19 12 12 19 5 12"/>
+    </svg>
+  </div>
+
+  <!-- Mute button: always rendered, hidden until curtain opens -->
+  <button
+    class="music-btn"
+    id="music-btn"
+    aria-label="Toggle music"
+    data-has-music={musicSrc ? 'true' : 'false'}
+  >
+    <!-- Speaker on -->
+    <svg class="music-btn__icon music-btn__icon--on" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+    </svg>
+    <!-- Speaker off -->
+    <svg class="music-btn__icon music-btn__icon--off" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  const curtain    = document.getElementById('curtain')!;
+  const cta        = document.getElementById('curtain-cta')!;
+  const musicBtn   = document.getElementById('music-btn')!;
+  const scrollHint = document.getElementById('scroll-hint')!;
+  const audio      = document.getElementById('bg-music') as HTMLAudioElement | null;
+  const hasMusic   = musicBtn.dataset.hasMusic === 'true';
+  let opened      = false;
+
+  // In half mode the curtain must never be position:fixed — it should sit
+  // at the top of the page and scroll away naturally once the user swipes
+  // down.  We override this immediately (before paint) so there is no flash
+  // of the fixed version.  We explicitly clear `bottom` so that the CSS
+  // `inset:0` shorthand doesn't stretch the element to full-page height.
+  if (curtain.dataset.mode === 'half') {
+    curtain.style.position = 'absolute';
+    curtain.style.top      = '0';
+    curtain.style.left     = '0';
+    curtain.style.right    = '0';
+    curtain.style.bottom   = 'auto';
+    curtain.style.height   = '100dvh';
+  }
+
+  // ── Audio helpers ─────────────────────────────────────────
+  function tryPlay() {
+    if (!audio) return;
+    audio.volume = 0.45;
+    audio.play().catch(() => {/* autoplay blocked — user must interact */});
+  }
+
+  if (hasMusic) {
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!audio) return;
+      if (audio.paused) {
+        tryPlay();
+        musicBtn.querySelector<SVGElement>('.music-btn__icon--on')!.style.display  = '';
+        musicBtn.querySelector<SVGElement>('.music-btn__icon--off')!.style.display = 'none';
+      } else {
+        audio.pause();
+        musicBtn.querySelector<SVGElement>('.music-btn__icon--on')!.style.display  = 'none';
+        musicBtn.querySelector<SVGElement>('.music-btn__icon--off')!.style.display = '';
+      }
+    });
+  }
+
+  // ── Curtain open ──────────────────────────────────────────
+  function openCurtain() {
+    if (opened) return;
+    opened = true;
+
+    if (hasMusic) tryPlay();
+
+    const mode       = curtain.dataset.mode ?? 'full';
+    const sweepDur   = mode === 'half' ? 1.8  : 2.5;
+    const overshootX = mode === 'half' ? 65   : 108;
+    const finalX     = mode === 'half' ? 55   : 100;
+    const SWEEP_AT   = 0.35;
+    const bounceAt   = SWEEP_AT + sweepDur - 0.25;
+    const settleAt   = bounceAt + 0.3;
+
+    const tl = gsap.timeline({
+      onComplete() {
+        curtain.style.pointerEvents = 'none';
+        curtain.setAttribute('aria-hidden', 'true');
+        if (hasMusic) {
+          gsap.to(musicBtn, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+        }
+
+        // Fade in scroll hint
+        gsap.to(scrollHint, { opacity: 1, y: 0, duration: 0.5, delay: 0.4, ease: 'power2.out' });
+        // Bouncing icon animation
+        gsap.to('.scroll-hint__icon', {
+          y: 6,
+          repeat: -1,
+          yoyo: true,
+          duration: 0.85,
+          ease: 'sine.inOut',
+          delay: 0.9,
+        });
+        // Hide once user scrolls
+        window.addEventListener('scroll', () => {
+          gsap.to(scrollHint, { opacity: 0, y: 6, duration: 0.35, ease: 'power2.in' });
+        }, { once: true });
+      },
+    });
+
+    tl.to(cta, { opacity: 0, y: -6, duration: 0.3, ease: 'power2.in' })
+      .to('.curtain__rings', { y: -5, duration: 0.18, ease: 'power1.in' }, 0.24)
+
+      .to('.curtain__panel--left',  { x: `-${overshootX}%`, duration: sweepDur, ease: 'expo.out' },            SWEEP_AT)
+      .to('.curtain__panel--right', { x:  `${overshootX}%`, duration: sweepDur, ease: 'expo.out', delay: 0.06 }, SWEEP_AT)
+
+      .to('.curtain__panel--left  .curtain__fabric', { skewX: -14, duration: 1.1, ease: 'power2.out' },            SWEEP_AT)
+      .to('.curtain__panel--right .curtain__fabric', { skewX:  14, duration: 1.1, ease: 'power2.out', delay: 0.06 }, SWEEP_AT)
+
+      .to('.curtain__panel--left',  { x: `-${finalX}%`, duration: 0.65, ease: 'back.out(1.6)' }, bounceAt)
+      .to('.curtain__panel--right', { x:  `${finalX}%`, duration: 0.65, ease: 'back.out(1.6)' }, bounceAt)
+
+      .to('.curtain__panel--left  .curtain__fabric', { skewX:  5, duration: 0.34, ease: 'power2.in' }, bounceAt)
+      .to('.curtain__panel--right .curtain__fabric', { skewX: -5, duration: 0.34, ease: 'power2.in' }, bounceAt)
+
+      .to('.curtain__panel--left  .curtain__fabric', { skewX: 0, duration: 0.8, ease: 'elastic.out(1, 0.42)' }, settleAt)
+      .to('.curtain__panel--right .curtain__fabric', { skewX: 0, duration: 0.8, ease: 'elastic.out(1, 0.42)' }, settleAt)
+
+      .to('.curtain__rings', { y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' }, bounceAt);
+  }
+
+  curtain.addEventListener('click', openCurtain);
+  curtain.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') openCurtain();
+  });
+
+  // Idle pulse on CTA arrow
+  gsap.to('.curtain__cta-icon', {
+    y: 5,
+    repeat: -1,
+    yoyo: true,
+    duration: 1.1,
+    ease: 'sine.inOut',
+    delay: 0.8,
+  });
+</script>
+
+<style define:vars={{ accentColor, goldColor, bgColor }}>
+  /* ── Layout wrapper ── */
+  .curtain-wrap {
+    position: relative;
+    width: 100%;
+  }
+  .curtain-content {
+    position: relative;
+    z-index: 0;
+  }
+
+  /* ══════════════════════════════
+     CURTAIN OVERLAY
+  ══════════════════════════════ */
+  .curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    cursor: pointer;
+    /* perspective for subtle 3-D depth on the fabric */
+    perspective: 1800px;
+  }
+  .curtain:focus-visible { outline: 2px solid var(--goldColor); outline-offset: -4px; }
+
+  /* ── Rod ── */
+  .curtain__rod {
+    position: absolute;
+    top: 0;
+    left: -2%;
+    right: -2%;
+    height: 9px;
+    z-index: 3;
+    background: linear-gradient(
+      90deg,
+      #7a5a28 0%,
+      #c4a055 18%,
+      #e8c878 38%,
+      #f0d890 50%,
+      #e8c878 62%,
+      #c4a055 82%,
+      #7a5a28 100%
+    );
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .curtain__rod-finial {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 35%, #f0d890, #c4a055 55%, #7a5a28 100%);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .curtain__rod-finial--left  { left: -4px; }
+  .curtain__rod-finial--right { right: -4px; }
+
+  /* ── Panels ── */
+  .curtain__panel {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Rings ── */
+  .curtain__rings {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 6px;
+    padding-top: 2px;
+    height: 18px;
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+  }
+  .curtain__ring {
+    display: block;
+    width: 12px;
+    height: 10px;
+    border-radius: 50% 50% 0 0;
+    border: 2.5px solid;
+    border-color: #c4a055 #c4a055 transparent transparent;
+    border-bottom: none;
+    background: transparent;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  /* ── Fabric ── */
+  .curtain__fabric {
+    flex: 1;
+    position: relative;
+    /* Base color */
+    background-color: var(--accentColor);
+    /* Layered gradients: pleat fold shadows + vertical shading */
+    background-image:
+      /* Pleat fold lines — uneven spacing feels more organic */
+      repeating-linear-gradient(
+        90deg,
+        transparent         0px,
+        rgba(0,0,0,0.28)    1.5px,
+        rgba(0,0,0,0)       5px,
+        rgba(255,255,255,0.055) 20px,
+        rgba(0,0,0,0)       28px,
+        rgba(0,0,0,0.20)    29px,
+        rgba(0,0,0,0)       33px,
+        rgba(255,255,255,0.035) 50px,
+        rgba(0,0,0,0)       58px,
+        rgba(0,0,0,0.22)    59px,
+        rgba(0,0,0,0)       63px,
+        rgba(255,255,255,0.04)  80px,
+        rgba(0,0,0,0)       88px
+      ),
+      /* Vertical shading: bright near rod, darkens to bottom */
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.18)  0%,
+        rgba(255,255,255,0.06)  8%,
+        rgba(0,0,0,0)          35%,
+        rgba(0,0,0,0.10)       65%,
+        rgba(0,0,0,0.24)      100%
+      );
+  }
+
+  /* Stronger center-seam shadow — the main tell that these are two separate hanging pieces */
+  .curtain__panel--left  .curtain__fabric {
+    box-shadow: inset -22px 0 38px -6px rgba(0,0,0,0.45),
+                inset  -3px 0  8px    rgba(0,0,0,0.22);
+  }
+  .curtain__panel--right .curtain__fabric {
+    box-shadow: inset  22px 0 38px -6px rgba(0,0,0,0.45),
+                inset   3px 0  8px    rgba(0,0,0,0.22);
+  }
+
+  /* ── Center CTA ── */
+  .curtain__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.88);
+    pointer-events: none;
+    user-select: none;
+  }
+  .curtain__cta-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .curtain__cta-icon {
+    width: 28px;
+    height: 28px;
+    opacity: 0.75;
+  }
+
+  /* Decorative ring around the CTA */
+  .curtain__cta::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.28);
+    pointer-events: none;
+  }
+
+  /* ══════════════════════════════
+     SCROLL HINT
+  ══════════════════════════════ */
+  .scroll-hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--accentColor);
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  .scroll-hint__label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .scroll-hint__icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.65;
+  }
+
+  /* ══════════════════════════════
+     MUSIC BUTTON
+  ══════════════════════════════ */
+  .music-btn {
+    position: fixed;
+    bottom: 1.4rem;
+    left: 1.4rem;
+    z-index: 200;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    background: var(--accentColor);
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.22);
+    /* hidden until curtain fully opens */
+    opacity: 0;
+    transform: translateY(8px);
+    transition: background 0.2s, border-color 0.2s;
+    /* prevent layout shift before JS runs */
+    pointer-events: none;
+  }
+  /* Once GSAP animates opacity to 1, re-enable pointer events */
+  .music-btn[style*="opacity: 1"] { pointer-events: auto; }
+  .music-btn:hover { background: color-mix(in srgb, var(--accentColor) 80%, white); }
+  .music-btn__icon {
+    width: 20px;
+    height: 20px;
+  }
+</style>

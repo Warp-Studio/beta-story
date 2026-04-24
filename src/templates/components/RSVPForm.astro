@@ -1,0 +1,445 @@
+---
+interface Props {
+  templateId: string;
+  /** URL of the Express server, e.g. http://localhost:3000 */
+  apiBase?: string;
+}
+const { templateId, apiBase = 'http://localhost:3000' } = Astro.props;
+---
+
+<section class="rsvp" aria-label="RSVP">
+  <div class="rsvp__inner">
+    <header class="rsvp__header">
+      <span class="rsvp__eyebrow">Kindly respond</span>
+      <h2 class="rsvp__title">Will you be there?</h2>
+      <div class="rsvp__rule" aria-hidden="true"></div>
+    </header>
+
+    <!-- Success state (hidden initially) -->
+    <div class="rsvp__success" id="rsvp-success" aria-live="polite" hidden>
+      <div class="rsvp__success-icon" aria-hidden="true">✦</div>
+      <p class="rsvp__success-msg">Thank you! We've received your response and can't wait to celebrate with you.</p>
+    </div>
+
+    <form
+      class="rsvp__form"
+      id="rsvp-form"
+      novalidate
+      data-api={apiBase}
+      data-template={templateId}
+    >
+      <!-- Name -->
+      <div class="rsvp__field">
+        <label class="rsvp__label" for="rsvp-name">Your Name <span aria-hidden="true">*</span></label>
+        <input
+          class="rsvp__input"
+          id="rsvp-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          placeholder="Full name"
+          required
+        />
+      </div>
+
+      <!-- Phone -->
+      <div class="rsvp__field">
+        <label class="rsvp__label" for="rsvp-phone">Phone</label>
+        <input
+          class="rsvp__input"
+          id="rsvp-phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          placeholder="+91 98765 43210"
+        />
+      </div>
+
+      <!-- Attending toggle -->
+      <fieldset class="rsvp__field rsvp__field--attending">
+        <legend class="rsvp__label">Attending? <span aria-hidden="true">*</span></legend>
+        <div class="rsvp__toggle-row">
+          <label class="rsvp__toggle-opt">
+            <input type="radio" name="attending" value="yes" required />
+            <span class="rsvp__toggle-btn">Joyfully accepts</span>
+          </label>
+          <label class="rsvp__toggle-opt">
+            <input type="radio" name="attending" value="maybe" />
+            <span class="rsvp__toggle-btn rsvp__toggle-btn--maybe">Maybe</span>
+          </label>
+          <label class="rsvp__toggle-opt">
+            <input type="radio" name="attending" value="no" />
+            <span class="rsvp__toggle-btn rsvp__toggle-btn--no">Regretfully declines</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Guest count (hidden only when attending = no) -->
+      <div class="rsvp__field rsvp__field--guests" id="rsvp-guests-field">
+        <label class="rsvp__label" for="rsvp-guests">Number of guests</label>
+        <div class="rsvp__stepper">
+          <button type="button" class="rsvp__step" id="rsvp-step-down" aria-label="Decrease guests">−</button>
+          <input
+            class="rsvp__input rsvp__input--stepper"
+            id="rsvp-guests"
+            name="guests"
+            type="number"
+            min="1"
+            max="10"
+            value="1"
+          />
+          <button type="button" class="rsvp__step" id="rsvp-step-up" aria-label="Increase guests">+</button>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="rsvp__field">
+        <label class="rsvp__label" for="rsvp-message">Leave a message <span class="rsvp__optional">(optional)</span></label>
+        <textarea
+          class="rsvp__input rsvp__input--textarea"
+          id="rsvp-message"
+          name="message"
+          rows="3"
+          placeholder="We wish you both a lifetime of happiness…"
+        ></textarea>
+      </div>
+
+      <p class="rsvp__error" id="rsvp-error" role="alert" hidden></p>
+
+      <button class="rsvp__submit" type="submit">
+        <span class="rsvp__submit-text">Send RSVP</span>
+        <span class="rsvp__submit-spinner" aria-hidden="true" hidden>⟳</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form       = document.getElementById('rsvp-form')     as HTMLFormElement;
+  const successEl  = document.getElementById('rsvp-success')  as HTMLElement;
+  const errorEl    = document.getElementById('rsvp-error')    as HTMLElement;
+  const guestsField = document.getElementById('rsvp-guests-field') as HTMLElement;
+  const guestsInput = document.getElementById('rsvp-guests')  as HTMLInputElement;
+  const stepUp     = document.getElementById('rsvp-step-up')  as HTMLButtonElement;
+  const stepDown   = document.getElementById('rsvp-step-down') as HTMLButtonElement;
+
+  // ── Guest stepper ──────────────────────────────────────
+  stepUp.addEventListener('click', () => {
+    guestsInput.value = String(Math.min(10, Number(guestsInput.value) + 1));
+  });
+  stepDown.addEventListener('click', () => {
+    guestsInput.value = String(Math.max(1, Number(guestsInput.value) - 1));
+  });
+
+  // ── Hide guest count when declining ───────────────────
+  form.querySelectorAll<HTMLInputElement>('input[name="attending"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      const attending = (form.querySelector<HTMLInputElement>('input[name="attending"]:checked'))?.value;
+      guestsField.style.display = attending === 'no' ? 'none' : '';
+    });
+  });
+
+  // ── Submit ─────────────────────────────────────────────
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.hidden = true;
+
+    const data = Object.fromEntries(new FormData(form));
+    if (!data.name?.toString().trim()) {
+      showError('Please enter your name.');
+      return;
+    }
+    if (!data.attending) {
+      showError("Please let us know if you'll be attending.");
+      return;
+    }
+
+    const btn     = form.querySelector<HTMLButtonElement>('.rsvp__submit')!;
+    const btnText = form.querySelector<HTMLElement>('.rsvp__submit-text')!;
+    const spinner = form.querySelector<HTMLElement>('.rsvp__submit-spinner')!;
+    btn.disabled   = true;
+    btnText.hidden = true;
+    spinner.hidden = false;
+
+    try {
+      const apiBase    = form.dataset.api    || 'http://localhost:3000';
+      const templateId = form.dataset.template || '';
+      const res = await fetch(`${apiBase}/api/rsvp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          template_id: templateId,
+          name:     data.name,
+          phone:    data.phone    || null,
+          attending: data.attending,
+          guests:   Number(data.guests) || 1,
+          message:  data.message  || null,
+        }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error((body as { error?: string }).error || 'Submission failed');
+      }
+
+      form.hidden = true;
+      successEl.hidden = false;
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+      showError(msg);
+      btn.disabled   = false;
+      btnText.hidden = false;
+      spinner.hidden = true;
+    }
+  });
+
+  function showError(msg: string) {
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+    errorEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+
+<style>
+  .rsvp {
+    background: var(--bg, #e8eef7);
+    padding: 3.5rem 1.25rem 5rem;
+  }
+
+  .rsvp__inner {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .rsvp__header {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .rsvp__eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold, #c8a97e);
+  }
+  .rsvp__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    color: var(--accent, #2d4a7a);
+    margin: 0;
+  }
+  .rsvp__rule {
+    width: 40px;
+    height: 1.5px;
+    background: var(--gold, #c8a97e);
+    margin-top: 0.4rem;
+    border-radius: 2px;
+  }
+
+  /* ── Success ── */
+  .rsvp__success {
+    text-align: center;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .rsvp__success-icon {
+    font-size: 2rem;
+    color: var(--gold, #c8a97e);
+  }
+  .rsvp__success-msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--accent, #2d4a7a);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Form ── */
+  .rsvp__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .rsvp__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .rsvp__label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent, #2d4a7a);
+    opacity: 0.8;
+  }
+  .rsvp__optional {
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.55;
+    font-size: 0.7rem;
+  }
+
+  .rsvp__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 0.9rem;
+    background: #fff;
+    border: 1.5px solid rgba(45,74,122,0.18);
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: #1e3560;
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+  .rsvp__input:focus { border-color: var(--accent, #2d4a7a); }
+  .rsvp__input::placeholder { color: #aab8cc; }
+  .rsvp__input--textarea { resize: vertical; min-height: 80px; }
+
+  /* ── Attending toggle ── */
+  .rsvp__field--attending { border: none; padding: 0; margin: 0; }
+  .rsvp__toggle-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .rsvp__toggle-opt { display: contents; cursor: pointer; }
+  .rsvp__toggle-opt input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .rsvp__toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border: 1.5px solid rgba(45,74,122,0.2);
+    background: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: #4a6596;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    user-select: none;
+  }
+  /* Yes — accent */
+  .rsvp__toggle-opt input:checked + .rsvp__toggle-btn {
+    background: var(--accent, #2d4a7a);
+    border-color: var(--accent, #2d4a7a);
+    color: #fff;
+  }
+  /* Maybe — warm amber */
+  .rsvp__toggle-btn--maybe {
+    border-color: rgba(160,110,30,0.25);
+    color: #8a6a20;
+  }
+  .rsvp__toggle-opt input:checked + .rsvp__toggle-btn--maybe {
+    background: #a06e1e;
+    border-color: #a06e1e;
+    color: #fff;
+  }
+  /* No — muted red */
+  .rsvp__toggle-btn--no {
+    border-color: rgba(100,60,60,0.2);
+    color: #8a6060;
+  }
+  .rsvp__toggle-opt input:checked + .rsvp__toggle-btn--no {
+    background: #7a3a3a;
+    border-color: #7a3a3a;
+    color: #fff;
+  }
+
+  /* ── Guest stepper ── */
+  .rsvp__stepper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 160px;
+  }
+  .rsvp__step {
+    width: 44px;
+    height: 44px;
+    background: var(--accent, #2d4a7a);
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+    line-height: 1;
+  }
+  .rsvp__step:first-child { border-radius: 10px 0 0 10px; }
+  .rsvp__step:last-child  { border-radius: 0 10px 10px 0; }
+  .rsvp__step:hover { opacity: 0.85; }
+  .rsvp__input--stepper {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    width: 60px;
+    padding: 0;
+    height: 44px;
+    font-size: 1rem;
+    -moz-appearance: textfield;
+  }
+  .rsvp__input--stepper::-webkit-inner-spin-button,
+  .rsvp__input--stepper::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+  /* ── Error ── */
+  .rsvp__error {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    color: #b94444;
+    padding: 0.6rem 0.8rem;
+    background: rgba(185,68,68,0.08);
+    border-radius: 8px;
+    border-left: 3px solid #b94444;
+    margin: 0;
+  }
+
+  /* ── Submit ── */
+  .rsvp__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.5rem;
+    background: var(--accent, #2d4a7a);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 0.3rem;
+  }
+  .rsvp__submit:hover:not(:disabled) { opacity: 0.88; }
+  .rsvp__submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .rsvp__submit-spinner {
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+    font-size: 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>

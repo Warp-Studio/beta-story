@@ -1,0 +1,262 @@
+---
+import type { WeddingEvent } from '../data';
+
+interface Props {
+  events: WeddingEvent[];
+}
+const { events } = Astro.props;
+
+function formatDate(iso: string) {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function getMapsUrl(ev: { mapsUrl?: string; venue?: string; address?: string }): string | null {
+  if (ev.mapsUrl) return ev.mapsUrl;
+  const q = [ev.venue, ev.address].filter(Boolean).join(', ');
+  return q ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}` : null;
+}
+---
+
+<section class="events" aria-label="Event details">
+  <div class="events__inner">
+
+    <header class="events__header">
+      <span class="events__eyebrow">Join Us</span>
+      <h2 class="events__title">Wedding Timeline</h2>
+      <div class="events__rule" aria-hidden="true"></div>
+    </header>
+
+    <ol class="timeline">
+      {events.map((ev, i) => (
+        <li class={`event ${i % 2 === 0 ? 'event--left' : 'event--right'}`}>
+
+          <div class="event__content">
+            <h3 class="event__name">{ev.name}</h3>
+            <time class="event__time">{ev.time}</time>
+            <p class="event__date">{formatDate(ev.date)}</p>
+            {ev.venue && <p class="event__venue">{ev.venue}</p>}
+            {ev.address && <p class="event__address">{ev.address}</p>}
+            {getMapsUrl(ev) && (
+              <a class="event__directions" href={getMapsUrl(ev)!} target="_blank" rel="noopener noreferrer">
+                <svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor" aria-hidden="true">
+                  <path d="M4.5 0a4 4 0 00-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 00-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/>
+                </svg>
+                Get Directions
+              </a>
+            )}
+          </div>
+
+          <div class="event__node" aria-hidden="true"></div>
+
+        </li>
+      ))}
+    </ol>
+
+  </div>
+</section>
+
+<style>
+  .events {
+    background: var(--bg, #f9f7f4);
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .events__inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .events__header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .events__eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold, #c8a97e);
+  }
+
+  .events__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.4rem, 6.5vw, 3.2rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent, #2d4a7a);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .events__rule {
+    width: 36px;
+    height: 1px;
+    background: var(--gold, #c8a97e);
+    margin-top: 0.5rem;
+  }
+
+  /* ── Spine ── */
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--accent, #2d4a7a);
+    transform: translateX(-50%);
+    opacity: 0.15;
+  }
+
+  /* ── Event row ── */
+  .event {
+    display: grid;
+    grid-template-columns: 1fr 3rem 1fr;
+    align-items: start;
+    padding: 2rem 0;
+  }
+
+  .event--left  { grid-template-areas: "content node ."; }
+  .event--right { grid-template-areas: ". node content"; }
+
+  /* ── Dot marker ── */
+  .event__node {
+    grid-area: node;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Filled dot — bg gap + gold ring anchors it to the spine */
+  .event__node::before {
+    content: '';
+    display: block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent, #2d4a7a);
+    box-shadow: 0 0 0 3px var(--bg, #f9f7f4), 0 0 0 4.5px var(--gold, #c8a97e);
+  }
+
+  /* ── Content block ── */
+  .event__content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event--left .event__content {
+    text-align: right;
+    align-items: flex-end;
+    padding-right: 1.4rem;
+  }
+
+  .event--right .event__content {
+    text-align: left;
+    align-items: flex-start;
+    padding-left: 1.4rem;
+  }
+
+  .event__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.45rem;
+    color: var(--accent, #2d4a7a);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  /* time sits right under the name — one visual unit */
+  .event__time {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--accent, #2d4a7a);
+    opacity: 0.75;
+    margin-top: 0.08rem;
+  }
+
+  /* date is meta — pull it close to time, away from venue */
+  .event__date {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--gold, #c8a97e);
+    margin: 0.08rem 0 0;
+  }
+
+  /* venue starts a new sub-group — noticeable gap above */
+  .event__venue {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: #5a6e84;
+    margin: 0.7rem 0 0;
+    line-height: 1.4;
+  }
+
+  /* address hugs venue */
+  .event__address {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    color: #8a9db5;
+    margin: 0.08rem 0 0;
+    line-height: 1.45;
+  }
+
+  /* ── Get Directions button ── */
+  .event__directions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.4rem;
+    padding: 0.28rem 0.65rem;
+    border: 1px solid color-mix(in srgb, var(--accent, #2d4a7a) 35%, transparent);
+    border-radius: 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent, #2d4a7a);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.18s, border-color 0.18s;
+  }
+
+  .event__directions:hover {
+    opacity: 1;
+    border-color: var(--gold, #c8a97e);
+    color: var(--gold, #c8a97e);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 420px) {
+    .event {
+      grid-template-columns: 1fr 2.25rem 1fr;
+    }
+
+    .event--left .event__content  { padding-right: 0.85rem; }
+    .event--right .event__content { padding-left: 0.85rem;  }
+
+    .event__name { font-size: 1.2rem; }
+  }
+</style>

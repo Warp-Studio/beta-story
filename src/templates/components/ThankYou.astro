@@ -1,0 +1,177 @@
+---
+import type { WeddingParent } from '../data';
+
+interface Props {
+  parents?: WeddingParent[];
+}
+const { parents = [] } = Astro.props;
+---
+
+<section class="thankyou" aria-label="Thank you">
+  <div class="thankyou__inner">
+
+    <div class="thankyou__ornament" aria-hidden="true">✦</div>
+
+    <h2 class="thankyou__heading">Thank You</h2>
+
+    <p class="thankyou__message">
+      For joining us on this special day.<br />
+      Your presence and blessings mean the world to us.
+    </p>
+
+    {parents.length > 0 && (
+      <div class="thankyou__parents">
+        <div class="thankyou__rule" aria-hidden="true"></div>
+
+        <ul class="parents">
+          {parents.map((p) => (
+            <li class="parent">
+              <span class="parent__label">{p.label}</span>
+              <span class="parent__name">{p.name}</span>
+              {p.phone && (
+                <a class="parent__phone" href={`tel:${p.phone.replace(/\s/g, '')}`}>
+                  {p.phone}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <div class="thankyou__footer" aria-hidden="true">✦ ❀ ✦</div>
+
+  </div>
+</section>
+
+<style>
+  .thankyou {
+    background: var(--bg, #f9f7f4);
+    padding: 4rem 1.5rem 5rem;
+    text-align: center;
+  }
+
+  .thankyou__inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .thankyou__ornament {
+    color: var(--gold, #c8a97e);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.25rem;
+  }
+
+  .thankyou__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.6rem, 7vw, 3.6rem);
+    font-style: italic;
+    color: var(--accent, #2d4a7a);
+    letter-spacing: 0.06em;
+    margin: 0 0 1.25rem;
+    line-height: 1.1;
+  }
+
+  .thankyou__message {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.05rem, 3vw, 1.2rem);
+    font-weight: 400;
+    color: var(--accent, #2d4a7a);
+    opacity: 0.75;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── Parents block ── */
+  .thankyou__parents {
+    width: 100%;
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .thankyou__rule {
+    width: 36px;
+    height: 1px;
+    background: var(--gold, #c8a97e);
+  }
+
+  .parents {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+    width: 100%;
+  }
+
+  .parent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  /* left column → right-aligned; right column → left-aligned */
+  .parents li:nth-child(odd)  { text-align: right;  align-items: flex-end; }
+  .parents li:nth-child(even) { text-align: left;   align-items: flex-start; }
+
+  .parent__label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold, #c8a97e);
+  }
+
+  .parent__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--accent, #2d4a7a);
+    line-height: 1.2;
+  }
+
+  .parent__phone {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    color: var(--accent, #2d4a7a);
+    opacity: 0.6;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: opacity 0.18s;
+  }
+
+  .parent__phone:hover {
+    opacity: 1;
+  }
+
+  /* ── Footer ornament ── */
+  .thankyou__footer {
+    margin-top: 2.5rem;
+    color: var(--gold, #c8a97e);
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+  }
+
+  /* ── Mobile: single column ── */
+  @media (max-width: 380px) {
+    .parents {
+      grid-template-columns: 1fr;
+    }
+
+    .parents li:nth-child(odd),
+    .parents li:nth-child(even) {
+      text-align: center;
+      align-items: center;
+    }
+  }
+</style>

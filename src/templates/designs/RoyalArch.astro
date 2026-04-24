@@ -1,0 +1,536 @@
+---
+interface Props {
+  partner1?: string;
+  partner2?: string;
+  date?: string;
+  time?: string;
+  venue?: string;
+  address?: string;
+  rsvp?: string;
+  ceremony?: string;
+}
+
+const {
+  partner1 = 'Name One',
+  partner2 = 'Name Two',
+  date     = '2025-07-27',
+  time     = '8:00 AM',
+  venue    = 'Venue Name',
+  address  = 'Address, City',
+  rsvp     = '',
+  ceremony = 'Wedding',
+} = Astro.props;
+
+const dateObj = new Date(date);
+const isValid = !isNaN(dateObj.getTime());
+const day     = isValid ? dateObj.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase() : '';
+const month   = isValid ? dateObj.toLocaleDateString('en-US', { month:   'long' }).toUpperCase() : '';
+const dayNum  = isValid ? String(dateObj.getDate()) : '';
+const year    = isValid ? String(dateObj.getFullYear()) : '';
+---
+
+<div class="ra">
+
+  <!-- ── Clip-path definitions ── -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <!-- Mughal keel arch — objectBoundingBox so it scales with any size element -->
+      <clipPath id="ra-mughal" clipPathUnits="objectBoundingBox">
+        <path d="M0,1 L0,0.45 C0.02,0.15 0.22,0 0.5,0 C0.78,0 0.98,0.15 1,0.45 L1,1 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <!-- ── Top decorative frieze ── -->
+  <div class="ra__frieze" aria-hidden="true">
+    <div class="ra__frieze-inner"></div>
+  </div>
+
+  <!-- ── Arch card ── -->
+  <div class="ra__arch-wrap">
+
+    <!-- Cream arch (clipped to keel shape) -->
+    <div class="ra__arch">
+      <div class="ra__content">
+
+        <span class="ra__om" aria-label="Om">ॐ</span>
+
+        <p class="ra__together">Together with their families</p>
+
+        <h1 class="ra__name" data-field="partner1">{partner1}</h1>
+        <span class="ra__amp">&amp;</span>
+        <h1 class="ra__name" data-field="partner2">{partner2}</h1>
+
+        <p class="ra__invite-text">
+          cordially invite you to join the occasion<br />of their joyous commitment on
+        </p>
+
+        <div class="ra__date-block">
+          <span class="ra__date-month" data-field="month">{month}</span>
+          <div class="ra__date-row">
+            <span class="ra__date-rule" aria-hidden="true"></span>
+            <span class="ra__date-day"  data-field="day">{day}</span>
+            <span class="ra__date-num"  data-field="dayNum">{dayNum}</span>
+            <span class="ra__date-time" data-field="time">{time}</span>
+            <span class="ra__date-rule" aria-hidden="true"></span>
+          </div>
+          <span class="ra__date-year" data-field="year">{year}</span>
+        </div>
+
+        <p class="ra__at">at</p>
+        <p class="ra__venue-name" data-field="venue"><strong>{venue}</strong></p>
+        {address && <p class="ra__venue-addr" data-field="address">{address}</p>}
+        {rsvp    && <p class="ra__rsvp"       data-field="rsvp">Kindly RSVP on {rsvp}</p>}
+
+      </div>
+    </div><!-- /ra__arch -->
+
+    <!-- ── Gold arch border lines (SVG overlay, not clipped) ── -->
+    <svg class="ra__arch-line" viewBox="0 0 1 1" preserveAspectRatio="none"
+         aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer glow line -->
+      <path d="M-0.014,1 L-0.014,0.47 C0.005,0.13 0.2,-0.018 0.5,-0.018 C0.8,-0.018 0.995,0.13 1.014,0.47 L1.014,1"
+            fill="none" stroke="rgba(196,146,28,0.38)" stroke-width="5"
+            vector-effect="non-scaling-stroke"/>
+      <!-- Main gold border -->
+      <path d="M0,1 L0,0.45 C0.02,0.15 0.22,0 0.5,0 C0.78,0 0.98,0.15 1,0.45 L1,1"
+            fill="none" stroke="#C4921C" stroke-width="2.2"
+            vector-effect="non-scaling-stroke"/>
+      <!-- Inner thin border -->
+      <path d="M0.028,1 L0.028,0.44 C0.048,0.165 0.24,0.028 0.5,0.028 C0.76,0.028 0.952,0.165 0.972,0.44 L0.972,1"
+            fill="none" stroke="rgba(196,146,28,0.55)" stroke-width="1"
+            vector-effect="non-scaling-stroke"/>
+      <!-- Keystone diamond at peak -->
+      <path d="M0.5,-0.006 L0.514,0.018 L0.5,0.042 L0.486,0.018 Z"
+            fill="#C4921C"/>
+      <!-- Spandrel dots at spring points -->
+      <circle cx="0.016" cy="0.445" r="0.012" fill="#C4921C"/>
+      <circle cx="0.984" cy="0.445" r="0.012" fill="#C4921C"/>
+    </svg>
+
+    <!-- ── Flower corners (inline SVG — no PNG needed) ── -->
+    <!-- Left arrangement -->
+    <svg class="ra__floral ra__floral--left" viewBox="0 0 200 200"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Leaves -->
+      <ellipse cx="30"  cy="175" rx="12" ry="56" fill="#3A6224" opacity="0.92" transform="rotate(-40 30  175)"/>
+      <ellipse cx="72"  cy="182" rx="11" ry="48" fill="#477629" opacity="0.92" transform="rotate(-14 72  182)"/>
+      <ellipse cx="138" cy="175" rx="11" ry="44" fill="#3A6224" opacity="0.92" transform="rotate(18  138 175)"/>
+      <ellipse cx="172" cy="162" rx="10" ry="38" fill="#548330" opacity="0.92" transform="rotate(40  172 162)"/>
+      <ellipse cx="108" cy="172" rx="7"  ry="30" fill="#477629" opacity="0.85" transform="rotate(-3  108 172)"/>
+      <!-- White gardenia (back, left) -->
+      <g transform="translate(64 116) rotate(-14)">
+        <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97"/>
+        <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#F5EFE4" opacity="0.97" transform="rotate(51.4)"/>
+        <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97" transform="rotate(102.8)"/>
+        <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#F5EFE4" opacity="0.97" transform="rotate(154.2)"/>
+        <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97" transform="rotate(205.6)"/>
+        <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#F5EFE4" opacity="0.97" transform="rotate(257)"/>
+        <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97" transform="rotate(308.4)"/>
+        <circle r="10" fill="#EDD060"/>
+        <circle r="4"  fill="#F5E890"/>
+      </g>
+      <!-- Pink rose (main, front) -->
+      <g transform="translate(128 142)">
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F4A8BC"/>
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(45)"/>
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F4A8BC" transform="rotate(90)"/>
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(135)"/>
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F2A0B4" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(225)"/>
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F4A8BC" transform="rotate(270)"/>
+        <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(315)"/>
+        <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#E886A0" transform="rotate(22.5)"/>
+        <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#F096B0" transform="rotate(82.5)"/>
+        <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#E886A0" transform="rotate(142.5)"/>
+        <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#F096B0" transform="rotate(202.5)"/>
+        <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#E886A0" transform="rotate(262.5)"/>
+        <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#F096B0" transform="rotate(322.5)"/>
+        <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#D86688" transform="rotate(10)"/>
+        <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#DC7090" transform="rotate(100)"/>
+        <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#D86688" transform="rotate(190)"/>
+        <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#DC7090" transform="rotate(280)"/>
+        <circle r="8" fill="#C04E6E"/>
+      </g>
+      <!-- White lily / magnolia (right) -->
+      <g transform="translate(172 105) rotate(12)">
+        <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FFFDF2"/>
+        <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FAFBEA" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FFFDF2" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FAFBEA" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FFFDF2" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FAFBEA" transform="rotate(300)"/>
+        <circle r="7" fill="#EDD060"/>
+      </g>
+      <!-- Yellow mimosa cluster -->
+      <g transform="translate(97 157)">
+        <circle cx="0"   cy="0"   r="5"   fill="#F8D840"/>
+        <circle cx="13"  cy="-7"  r="4"   fill="#F0C828"/>
+        <circle cx="-10" cy="-9"  r="4"   fill="#F8D840"/>
+        <circle cx="7"   cy="-19" r="3.5" fill="#F0C828"/>
+        <circle cx="-5"  cy="-20" r="3.5" fill="#F8D840"/>
+        <circle cx="18"  cy="-17" r="3"   fill="#F0C828"/>
+      </g>
+      <!-- Small secondary yellow cluster -->
+      <g transform="translate(46 148)">
+        <circle cx="0"  cy="0"  r="3.5" fill="#F8D840"/>
+        <circle cx="9"  cy="-6" r="3"   fill="#F0C828"/>
+        <circle cx="-7" cy="-5" r="3"   fill="#F8D840"/>
+      </g>
+    </svg>
+
+    <!-- Right arrangement (mirror of left) -->
+    <svg class="ra__floral ra__floral--right" viewBox="0 0 200 200"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="scale(-1 1) translate(-200 0)">
+        <ellipse cx="30"  cy="175" rx="12" ry="56" fill="#3A6224" opacity="0.92" transform="rotate(-40 30  175)"/>
+        <ellipse cx="72"  cy="182" rx="11" ry="48" fill="#477629" opacity="0.92" transform="rotate(-14 72  182)"/>
+        <ellipse cx="138" cy="175" rx="11" ry="44" fill="#3A6224" opacity="0.92" transform="rotate(18  138 175)"/>
+        <ellipse cx="172" cy="162" rx="10" ry="38" fill="#548330" opacity="0.92" transform="rotate(40  172 162)"/>
+        <ellipse cx="108" cy="172" rx="7"  ry="30" fill="#477629" opacity="0.85" transform="rotate(-3  108 172)"/>
+        <g transform="translate(64 116) rotate(-14)">
+          <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97"/>
+          <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#F5EFE4" opacity="0.97" transform="rotate(51.4)"/>
+          <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97" transform="rotate(102.8)"/>
+          <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#F5EFE4" opacity="0.97" transform="rotate(154.2)"/>
+          <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97" transform="rotate(205.6)"/>
+          <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#F5EFE4" opacity="0.97" transform="rotate(257)"/>
+          <ellipse cx="0" cy="-28" rx="13" ry="22" fill="#FAF5EC" opacity="0.97" transform="rotate(308.4)"/>
+          <circle r="10" fill="#EDD060"/>
+          <circle r="4"  fill="#F5E890"/>
+        </g>
+        <g transform="translate(128 142)">
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F4A8BC"/>
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(45)"/>
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F4A8BC" transform="rotate(90)"/>
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(135)"/>
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F2A0B4" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(225)"/>
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#F4A8BC" transform="rotate(270)"/>
+          <ellipse cx="0" cy="-30" rx="14" ry="24" fill="#EE96A8" transform="rotate(315)"/>
+          <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#E886A0" transform="rotate(22.5)"/>
+          <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#F096B0" transform="rotate(82.5)"/>
+          <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#E886A0" transform="rotate(142.5)"/>
+          <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#F096B0" transform="rotate(202.5)"/>
+          <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#E886A0" transform="rotate(262.5)"/>
+          <ellipse cx="0" cy="-19" rx="11" ry="17" fill="#F096B0" transform="rotate(322.5)"/>
+          <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#D86688" transform="rotate(10)"/>
+          <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#DC7090" transform="rotate(100)"/>
+          <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#D86688" transform="rotate(190)"/>
+          <ellipse cx="0" cy="-11" rx="8"  ry="11" fill="#DC7090" transform="rotate(280)"/>
+          <circle r="8" fill="#C04E6E"/>
+        </g>
+        <g transform="translate(172 105) rotate(12)">
+          <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FFFDF2"/>
+          <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FAFBEA" transform="rotate(60)"/>
+          <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FFFDF2" transform="rotate(120)"/>
+          <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FAFBEA" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FFFDF2" transform="rotate(240)"/>
+          <ellipse cx="0" cy="-32" rx="9"  ry="27" fill="#FAFBEA" transform="rotate(300)"/>
+          <circle r="7" fill="#EDD060"/>
+        </g>
+        <g transform="translate(97 157)">
+          <circle cx="0"   cy="0"   r="5"   fill="#F8D840"/>
+          <circle cx="13"  cy="-7"  r="4"   fill="#F0C828"/>
+          <circle cx="-10" cy="-9"  r="4"   fill="#F8D840"/>
+          <circle cx="7"   cy="-19" r="3.5" fill="#F0C828"/>
+          <circle cx="-5"  cy="-20" r="3.5" fill="#F8D840"/>
+          <circle cx="18"  cy="-17" r="3"   fill="#F0C828"/>
+        </g>
+        <g transform="translate(46 148)">
+          <circle cx="0"  cy="0"  r="3.5" fill="#F8D840"/>
+          <circle cx="9"  cy="-6" r="3"   fill="#F0C828"/>
+          <circle cx="-7" cy="-5" r="3"   fill="#F8D840"/>
+        </g>
+      </g>
+    </svg>
+
+  </div><!-- /ra__arch-wrap -->
+
+</div><!-- /ra -->
+
+<style>
+  /* ════════════════════════════════════
+     ROOT — amber + jali background
+  ════════════════════════════════════ */
+  .ra {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
+    /* Warm amber stone base */
+    background-color: #BF7818;
+
+    /* Jali lattice: two diagonal grids create diamond pattern */
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0, transparent 11px,
+        rgba(255,218,100,0.22) 11px, rgba(255,218,100,0.22) 12.5px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0, transparent 11px,
+        rgba(255,218,100,0.22) 11px, rgba(255,218,100,0.22) 12.5px
+      ),
+      /* Stone block grid */
+      repeating-linear-gradient(
+        90deg,
+        transparent 0, transparent 22px,
+        rgba(100,45,0,0.1) 22px, rgba(100,45,0,0.1) 23px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0, transparent 22px,
+        rgba(100,45,0,0.1) 22px, rgba(100,45,0,0.1) 23px
+      );
+  }
+
+  /* ════════════════════════════════════
+     TOP FRIEZE
+  ════════════════════════════════════ */
+  .ra__frieze {
+    width: 100%;
+    height: 52px;
+    background: #9A5E0C;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.38);
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+  .ra__frieze::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,80,0.7) 35%, rgba(255,215,80,0.7) 65%, transparent);
+  }
+  .ra__frieze::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: rgba(0,0,0,0.22);
+  }
+  .ra__frieze-inner {
+    height: 100%;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0, transparent 18px,
+        rgba(255,200,70,0.32) 18px, rgba(255,200,70,0.32) 19.5px,
+        transparent 19.5px, transparent 38px,
+        rgba(0,0,0,0.12) 38px, rgba(0,0,0,0.12) 39.5px
+      );
+  }
+
+  /* ════════════════════════════════════
+     ARCH WRAPPER
+  ════════════════════════════════════ */
+  .ra__arch-wrap {
+    position: relative;
+    width: min(300px, 86vw);
+    margin-top: 1rem;
+    /* overflow visible so flowers protrude past edges */
+    overflow: visible;
+    z-index: 1;
+  }
+
+  /* ════════════════════════════════════
+     CREAM ARCH (clipped)
+  ════════════════════════════════════ */
+  .ra__arch {
+    clip-path: url(#ra-mughal);
+    /* subtle gradient: brightest at top, warmers at bottom */
+    background: linear-gradient(170deg, #FFFCF4 0%, #FAF4E4 45%, #F5EAD4 100%);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Gold border SVG — sits OVER the arch, not clipped */
+  .ra__arch-line {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: visible;
+  }
+
+  /* ════════════════════════════════════
+     INVITE CONTENT
+  ════════════════════════════════════ */
+  .ra__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* top padding: clear past the arch peak (~45% arch height) */
+    padding: 20% 1.6rem 140px;
+    gap: 0.12rem;
+  }
+
+  /* Om symbol — large, deep amber */
+  .ra__om {
+    font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif;
+    font-size: clamp(2.2rem, 8vw, 3rem);
+    color: #7A4A08;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .ra__together {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(0.78rem, 2.9vw, 0.92rem);
+    color: #7A4A08;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.6rem;
+  }
+
+  /* Names — ALL CAPS, large */
+  .ra__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 7.5vw, 2.5rem);
+    color: #6A3E06;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .ra__amp {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 4.2vw, 1.45rem);
+    color: #C4921C;
+    line-height: 1.2;
+    margin: 0.05rem 0;
+  }
+
+  .ra__invite-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(0.76rem, 2.7vw, 0.9rem);
+    color: #7A4A08;
+    line-height: 1.6;
+    margin: 0.55rem 0 0;
+    opacity: 0.88;
+  }
+
+  /* ── Date block ── */
+  .ra__date-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    margin: 1rem 0 0.5rem;
+    width: 100%;
+  }
+
+  .ra__date-month {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.26em;
+    color: #7A4A08;
+  }
+
+  .ra__date-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto 1fr;
+    align-items: center;
+    gap: 0.42rem;
+    width: 100%;
+    max-width: 228px;
+  }
+
+  .ra__date-rule {
+    display: block;
+    height: 1px;
+    background: #8B5C0A;
+    opacity: 0.4;
+  }
+
+  .ra__date-day,
+  .ra__date-time {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7A4A08;
+    white-space: nowrap;
+  }
+
+  .ra__date-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 10vw, 3.6rem);
+    color: #6A3E06;
+    line-height: 1;
+  }
+
+  .ra__date-year {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #7A4A08;
+  }
+
+  .ra__at {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: #7A4A08;
+    opacity: 0.72;
+    margin: 0.2rem 0 0;
+  }
+
+  .ra__venue-name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.78rem, 3vw, 0.92rem);
+    letter-spacing: 0.02em;
+    color: #5C3404;
+    margin: 0.1rem 0 0;
+    line-height: 1.35;
+  }
+
+  .ra__venue-addr {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.74rem;
+    color: #7A4A08;
+    opacity: 0.78;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .ra__rsvp {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: #7A4A08;
+    margin-top: 0.6rem;
+    opacity: 0.85;
+  }
+
+  /* ════════════════════════════════════
+     FLOWER CORNERS
+  ════════════════════════════════════ */
+  .ra__floral {
+    position: absolute;
+    bottom: -8px;
+    width: 54%;
+    height: 180px;
+    pointer-events: none;
+    z-index: 4;
+    overflow: visible;
+  }
+  .ra__floral--left  { left:  -16px; }
+  .ra__floral--right { right: -16px; }
+</style>

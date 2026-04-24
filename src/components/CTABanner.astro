@@ -8,11 +8,10 @@
     <div class="cta-copy">
       <span class="section-tag">Get Started Today</span>
       <h2 class="section-title">Your guests are already<br>asking. <em>Be ready.</em></h2>
-      <p class="section-body">Drop your details and we'll WhatsApp you a sample site within 2 hours. No payment needed to get started.</p>
+      <p class="section-body">Drop your details. No payment needed to get started.</p>
       <ul class="cta-trust">
         <li>2,000+ couples already with us</li>
         <li>Live in as little as 24 hours</li>
-        <li>No spam. No cold calls. Ever.</li>
       </ul>
     </div>
 
@@ -54,7 +53,6 @@
           </div>
         </div>
         <button type="submit" class="cta-submit">Get My Wedding Website →</button>
-        <p class="cta-form-note">We'll WhatsApp you a sample site within 2 hours.</p>
       </form>
       <div class="cta-success" id="ctaSuccess">
         <div class="cta-success-icon">✦</div>
@@ -69,9 +67,11 @@
 <script>
   const ctaForm = document.getElementById('ctaForm') as HTMLFormElement | null;
   const ctaSuccess = document.getElementById('ctaSuccess');
+  const submitBtn = ctaForm?.querySelector('.cta-submit') as HTMLButtonElement | null;
+  const API_URL = import.meta.env.PUBLIC_API_URL ?? 'http://localhost:3000';
 
-  if (ctaForm && ctaSuccess) {
-    ctaForm.addEventListener('submit', (e) => {
+  if (ctaForm && ctaSuccess && submitBtn) {
+    ctaForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(ctaForm);
       const names = (data.get('names') as string).trim();
@@ -81,6 +81,20 @@
       const plan  = data.get('plan') as string;
 
       if (!names || !phone || !email) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Saving…';
+
+      // Save lead to DB — fire and forget so WhatsApp always opens
+      try {
+        await fetch(`${API_URL}/api/leads`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ names, phone, email, wedding_date: date || null, plan }),
+        });
+      } catch {
+        // API unreachable — still open WhatsApp
+      }
 
       const dateStr = date
         ? new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })

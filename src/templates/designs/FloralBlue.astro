@@ -1,0 +1,277 @@
+---
+interface Props {
+  partner1?: string;
+  partner2?: string;
+  date?: string;
+  time?: string;
+  venue?: string;
+  address?: string;
+  rsvp?: string;
+  ceremony?: string;
+}
+
+const {
+  partner1 = 'Name One',
+  partner2 = 'Name Two',
+  date = 'Friday, May 10, 2025',
+  time = '4pm',
+  venue = 'Venue Name',
+  address = 'Address, City',
+  rsvp = '',
+  ceremony = 'Nikaah',
+} = Astro.props;
+
+// Parse date parts for the styled date block
+const dateObj = new Date(date);
+const isValidDate = !isNaN(dateObj.getTime());
+const day = isValidDate ? dateObj.toLocaleDateString('en-US', { weekday: 'long' }) : date.split(',')[0]?.trim() ?? '';
+const month = isValidDate ? dateObj.toLocaleDateString('en-US', { month: 'long' }) : '';
+const dayNum = isValidDate ? dateObj.getDate() : '';
+const year = isValidDate ? dateObj.getFullYear() : '';
+---
+
+<div class="invite">
+  <!-- Corner florals -->
+  <div class="floral floral--tl" aria-hidden="true"></div>
+  <div class="floral floral--tr" aria-hidden="true"></div>
+  <div class="floral floral--bl" aria-hidden="true"></div>
+  <div class="floral floral--br" aria-hidden="true"></div>
+
+  <div class="invite__inner">
+    <!-- Bismillah -->
+    <div class="bismillah" aria-label="Bismillah">
+      <span class="bismillah__arabic" data-field="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</span>
+      <p class="bismillah__translation">(With Allah's Blessings)</p>
+    </div>
+
+    <p class="invite__intro">we invite you to the {ceremony} ceremony of</p>
+
+    <h1 class="invite__name" data-field="partner1">{partner1}</h1>
+
+    <div class="invite__ampersand">&amp;</div>
+
+    <h1 class="invite__name" data-field="partner2">{partner2}</h1>
+
+    <div class="invite__date-block">
+      <div class="invite__date-rule"></div>
+      <div class="invite__date-center">
+        <span class="invite__date-month" data-field="month">{month}</span>
+        <span class="invite__date-num" data-field="dayNum">{dayNum}</span>
+        <span class="invite__date-year" data-field="year">{year}</span>
+      </div>
+      <div class="invite__date-rule"></div>
+      <div class="invite__date-sub">
+        <span class="invite__date-day" data-field="day">{day}</span>
+        <span class="invite__date-time" data-field="time">{time}</span>
+      </div>
+    </div>
+
+    <div class="invite__venue">
+      <p class="invite__venue-name" data-field="venue">{venue}</p>
+      {address && <p class="invite__venue-address" data-field="address">{address}</p>}
+      {rsvp && <p class="invite__rsvp" data-field="rsvp">RSVP AT {rsvp}</p>}
+    </div>
+
+    <div class="invite__divider" aria-hidden="true">✦ ❀ ✦</div>
+  </div>
+</div>
+
+<style>
+  .invite {
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
+    background: #e8eef7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ── Floral corner decorations ── */
+  .floral {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.55;
+  }
+  .floral--tl { top: 0; left: 0; background-image: url('/florals/corner-tl.png'); background-position: top left; }
+  .floral--tr { top: 0; right: 0; background-image: url('/florals/corner-tr.png'); background-position: top right; transform: scaleX(-1); }
+  .floral--bl { bottom: 0; left: 0; background-image: url('/florals/corner-bl.png'); background-position: bottom left; transform: scaleY(-1); }
+  .floral--br { bottom: 0; right: 0; background-image: url('/florals/corner-br.png'); background-position: bottom right; transform: scale(-1); }
+
+  /* ── Inner layout ── */
+  .invite__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 2.5rem;
+    max-width: 480px;
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  /* ── Bismillah ── */
+  .bismillah {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 1.25rem;
+  }
+  .bismillah__arabic {
+    font-size: 1.9rem;
+    color: #2d4a7a;
+    font-family: 'Scheherazade New', 'Noto Naskh Arabic', serif;
+    line-height: 1.4;
+  }
+  .bismillah__translation {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #4a6596;
+    margin: 0;
+  }
+
+  /* ── Intro text ── */
+  .invite__intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #3a5080;
+    margin: 0 0 1.2rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Names ── */
+  .invite__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 9vw, 3.6rem);
+    color: #2d4a7a;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  /* ── Ampersand ── */
+  .invite__ampersand {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(2rem, 8vw, 3rem);
+    color: #c8a97e;
+    line-height: 1;
+    margin: 0.4rem 0;
+  }
+
+  /* ── Date block ── */
+  .invite__date-block {
+    margin: 1.8rem 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 1rem;
+    row-gap: 0.15rem;
+    width: 100%;
+  }
+  .invite__date-rule {
+    height: 1px;
+    background: #2d4a7a;
+    opacity: 0.4;
+    align-self: center;
+  }
+  .invite__date-center {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .invite__date-month {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #3a5080;
+  }
+  .invite__date-num {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.8rem, 10vw, 4rem);
+    color: #2d4a7a;
+    line-height: 1;
+  }
+  .invite__date-year {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: #3a5080;
+  }
+  .invite__date-sub {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    padding-top: 0.35rem;
+  }
+  .invite__date-day,
+  .invite__date-time {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: #3a5080;
+    text-transform: uppercase;
+    border-bottom: 1px solid #2d4a7a60;
+    padding-bottom: 2px;
+  }
+
+  /* ── Venue ── */
+  .invite__venue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .invite__venue-name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #2d4a7a;
+    margin: 0;
+  }
+  .invite__venue-address {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: #4a6596;
+    margin: 0;
+  }
+  .invite__rsvp {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4a6596;
+    margin: 0.2rem 0 0;
+  }
+
+  /* ── Bottom divider ── */
+  .invite__divider {
+    margin-top: 1.5rem;
+    color: #c8a97e;
+    font-size: 0.9rem;
+    letter-spacing: 0.4em;
+  }
+</style>

@@ -1,0 +1,155 @@
+---
+interface Props {
+  /** ISO date string, e.g. "2025-05-10" */
+  targetDate: string;
+  label?: string;
+}
+const { targetDate, label = "Until the big day" } = Astro.props;
+---
+
+<section class="countdown" data-target={targetDate} aria-label="Countdown to wedding">
+  <p class="countdown__label">{label}</p>
+
+  <div class="countdown__grid">
+    <div class="countdown__unit">
+      <span class="countdown__num" id="cd-days">--</span>
+      <span class="countdown__name">Days</span>
+    </div>
+    <div class="countdown__sep" aria-hidden="true">:</div>
+    <div class="countdown__unit">
+      <span class="countdown__num" id="cd-hours">--</span>
+      <span class="countdown__name">Hours</span>
+    </div>
+    <div class="countdown__sep" aria-hidden="true">:</div>
+    <div class="countdown__unit">
+      <span class="countdown__num" id="cd-mins">--</span>
+      <span class="countdown__name">Mins</span>
+    </div>
+    <div class="countdown__sep" aria-hidden="true">:</div>
+    <div class="countdown__unit">
+      <span class="countdown__num" id="cd-secs">--</span>
+      <span class="countdown__name">Secs</span>
+    </div>
+  </div>
+
+  <div class="countdown__ornament" aria-hidden="true">✦</div>
+</section>
+
+<script>
+  const section = document.querySelector<HTMLElement>('.countdown')!;
+
+  function getTarget(): Date {
+    // URL param overrides the rendered default
+    const urlDate = new URLSearchParams(window.location.search).get('date');
+    const raw = urlDate || section.dataset.target || '';
+    const d = new Date(raw);
+    return isNaN(d.getTime()) ? new Date() : d;
+  }
+
+  const days  = document.getElementById('cd-days')!;
+  const hours = document.getElementById('cd-hours')!;
+  const mins  = document.getElementById('cd-mins')!;
+  const secs  = document.getElementById('cd-secs')!;
+
+  function pad(n: number) { return String(Math.max(0, n)).padStart(2, '0'); }
+
+  function tick() {
+    const diff = getTarget().getTime() - Date.now();
+    if (diff <= 0) {
+      days.textContent = hours.textContent = mins.textContent = secs.textContent = '00';
+      return;
+    }
+    const d = Math.floor(diff / 86_400_000);
+    const h = Math.floor((diff % 86_400_000) / 3_600_000);
+    const m = Math.floor((diff % 3_600_000)  /    60_000);
+    const s = Math.floor((diff %    60_000)  /     1_000);
+
+    days.textContent  = pad(d);
+    hours.textContent = pad(h);
+    mins.textContent  = pad(m);
+    secs.textContent  = pad(s);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+<style>
+  .countdown {
+    background: var(--bg, #e8eef7);
+    padding: 2rem 1.25rem 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .countdown__label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+    color: var(--accent, #2d4a7a);
+    opacity: 0.75;
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── 4-column grid of units + separators ── */
+  .countdown__grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.5rem, 2.5vw, 1.4rem);
+  }
+
+  .countdown__sep {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    font-weight: 300;
+    color: var(--gold, #c8a97e);
+    line-height: 1;
+    margin-bottom: 1.4rem; /* align with numbers, offset by label height */
+  }
+
+  .countdown__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: clamp(52px, 14vw, 80px);
+  }
+
+  .countdown__num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2.8rem, 10vw, 5rem);
+    color: var(--accent, #2d4a7a);
+    line-height: 1;
+    /* subtle glass card */
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 10px;
+    padding: 0.2em 0.35em;
+    min-width: 1.6em;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(45,74,122,0.08);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .countdown__name {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent, #2d4a7a);
+    opacity: 0.6;
+  }
+
+  .countdown__ornament {
+    color: var(--gold, #c8a97e);
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+</style>
